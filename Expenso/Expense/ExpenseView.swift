@@ -99,8 +99,10 @@ struct ExpenseMainView: View {
             }.frame(maxWidth: .infinity).background(Color.secondary_color).cornerRadius(4)
             
             HStack(spacing: 8) {
-                ExpenseModelView(isIncome: true, filter: filter)
-                ExpenseModelView(isIncome: false, filter: filter)
+                NavigationLink(destination: NavigationLazyView(ExpenseFilterView(isIncome: true)),
+                               label: { ExpenseModelView(isIncome: true, filter: filter) })
+                NavigationLink(destination: NavigationLazyView(ExpenseFilterView(isIncome: false)),
+                               label: { ExpenseModelView(isIncome: false, filter: filter) })
             }.frame(maxWidth: .infinity)
             
             Spacer().frame(height: 16)
@@ -184,9 +186,11 @@ struct ExpenseTransView: View {
     var body: some View {
         HStack {
             
-            Image(getTransTagIcon(transTag: expenseObj.tag ?? ""))
-                .resizable().frame(width: 24, height: 24).padding(16)
-                .background(Color.primary_color).cornerRadius(4)
+            NavigationLink(destination: NavigationLazyView(ExpenseFilterView(categTag: expenseObj.tag)), label: {
+                Image(getTransTagIcon(transTag: expenseObj.tag ?? ""))
+                    .resizable().frame(width: 24, height: 24).padding(16)
+                    .background(Color.primary_color).cornerRadius(4)
+            })
             
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
