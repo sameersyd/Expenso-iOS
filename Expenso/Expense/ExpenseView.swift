@@ -25,7 +25,7 @@ struct ExpenseView: View {
                 
                 VStack {
                     NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {  })
-                    ToolbarModelView(title: "Dashboard", button1Icon: IMAGE_SETTINGS_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
+                    ToolbarModelView(title: "Dashboard", button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.displaySettings = true }
                         button2Method: { self.showingSheet = true }
                         .actionSheet(isPresented: $showingSheet) {
