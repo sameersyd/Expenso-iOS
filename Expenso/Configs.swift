@@ -9,6 +9,10 @@ import Foundation
 
 // App Globals
 let APP_NAME = "Expenso"
+let APP_LINK = "https://github.com/sameersyd/Expenso"
+let SHARED_FROM_WELBY = """
+    Shared from \(APP_NAME) App: \(APP_LINK)
+    """
 
 // IMAGE_ICON NAMES
 let IMAGE_DELETE_ICON = "delete_icon"

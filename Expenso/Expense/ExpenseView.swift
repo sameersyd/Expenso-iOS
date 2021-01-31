@@ -111,7 +111,7 @@ struct ExpenseMainView: View {
             }.padding(4)
             
             ForEach(self.fetchRequest.wrappedValue) { expenseObj in
-                ExpenseTransView(expenseObj: expenseObj)
+                NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
             }
             
             Spacer().frame(height: 150)
