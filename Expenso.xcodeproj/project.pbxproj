@@ -22,6 +22,16 @@
 		738B1C4C25C663060067407B /* DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C4B25C663060067407B /* DismissKeyboard.swift */; };
 		738B1C4F25C663180067407B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C4E25C663180067407B /* DateExtension.swift */; };
 		738B1C5225C6632F0067407B /* HelperMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C5125C6632F0067407B /* HelperMethods.swift */; };
+		738B1C5F25C671A80067407B /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5525C671A70067407B /* Inter-ExtraLight.ttf */; };
+		738B1C6025C671A80067407B /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5625C671A70067407B /* Inter-Black.ttf */; };
+		738B1C6125C671A80067407B /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5725C671A80067407B /* Inter-Medium.ttf */; };
+		738B1C6225C671A80067407B /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5825C671A80067407B /* Inter-SemiBold.ttf */; };
+		738B1C6325C671A80067407B /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5925C671A80067407B /* Inter-Bold.ttf */; };
+		738B1C6425C671A80067407B /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5A25C671A80067407B /* OFL.txt */; };
+		738B1C6525C671A80067407B /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5B25C671A80067407B /* Inter-ExtraBold.ttf */; };
+		738B1C6625C671A80067407B /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5C25C671A80067407B /* Inter-Light.ttf */; };
+		738B1C6725C671A80067407B /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5D25C671A80067407B /* Inter-Thin.ttf */; };
+		738B1C6825C671A80067407B /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5E25C671A80067407B /* Inter-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +52,16 @@
 		738B1C4B25C663060067407B /* DismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
 		738B1C4E25C663180067407B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		738B1C5125C6632F0067407B /* HelperMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperMethods.swift; sourceTree = "<group>"; };
+		738B1C5525C671A70067407B /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
+		738B1C5625C671A70067407B /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
+		738B1C5725C671A80067407B /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		738B1C5825C671A80067407B /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		738B1C5925C671A80067407B /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		738B1C5A25C671A80067407B /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		738B1C5B25C671A80067407B /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
+		738B1C5C25C671A80067407B /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
+		738B1C5D25C671A80067407B /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
+		738B1C5E25C671A80067407B /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +94,7 @@
 		738B1C1625C65DFE0067407B /* Expenso */ = {
 			isa = PBXGroup;
 			children = (
+				738B1C5425C671680067407B /* Inter */,
 				738B1C3A25C662060067407B /* Helpers */,
 				738B1C3625C661580067407B /* Expense */,
 				738B1C3125C660070067407B /* CoreData */,
@@ -124,6 +145,23 @@
 				738B1C5125C6632F0067407B /* HelperMethods.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		738B1C5425C671680067407B /* Inter */ = {
+			isa = PBXGroup;
+			children = (
+				738B1C5625C671A70067407B /* Inter-Black.ttf */,
+				738B1C5925C671A80067407B /* Inter-Bold.ttf */,
+				738B1C5B25C671A80067407B /* Inter-ExtraBold.ttf */,
+				738B1C5525C671A70067407B /* Inter-ExtraLight.ttf */,
+				738B1C5C25C671A80067407B /* Inter-Light.ttf */,
+				738B1C5725C671A80067407B /* Inter-Medium.ttf */,
+				738B1C5E25C671A80067407B /* Inter-Regular.ttf */,
+				738B1C5825C671A80067407B /* Inter-SemiBold.ttf */,
+				738B1C5D25C671A80067407B /* Inter-Thin.ttf */,
+				738B1C5A25C671A80067407B /* OFL.txt */,
+			);
+			path = Inter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,8 +221,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				738B1C6625C671A80067407B /* Inter-Light.ttf in Resources */,
+				738B1C6225C671A80067407B /* Inter-SemiBold.ttf in Resources */,
 				738B1C1F25C65E060067407B /* Preview Assets.xcassets in Resources */,
+				738B1C6525C671A80067407B /* Inter-ExtraBold.ttf in Resources */,
+				738B1C5F25C671A80067407B /* Inter-ExtraLight.ttf in Resources */,
+				738B1C6725C671A80067407B /* Inter-Thin.ttf in Resources */,
+				738B1C6325C671A80067407B /* Inter-Bold.ttf in Resources */,
 				738B1C1C25C65E060067407B /* Assets.xcassets in Resources */,
+				738B1C6125C671A80067407B /* Inter-Medium.ttf in Resources */,
+				738B1C6425C671A80067407B /* OFL.txt in Resources */,
+				738B1C6825C671A80067407B /* Inter-Regular.ttf in Resources */,
+				738B1C6025C671A80067407B /* Inter-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
