@@ -40,6 +40,7 @@ struct ExpenseView: View {
                                     .cancel()
                             ])
                         }
+                    ExpenseMainView(filter: filter)
                         .actionSheet(isPresented: $showOptionsSheet) {
                             ActionSheet(title: Text("Select an option"), buttons: [
                                     .default(Text("About")) { self.displayAbout = true },
@@ -47,7 +48,6 @@ struct ExpenseView: View {
                                     .cancel()
                             ])
                         }
-                    ExpenseMainView(filter: filter)
                     Spacer()
                 }.edgesIgnoringSafeArea(.all)
                 
