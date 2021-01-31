@@ -15,7 +15,10 @@ struct ExpenseView: View {
     @FetchRequest(fetchRequest: ExpenseCD.getAllExpenseData(sortBy: ExpenseCDSort.occuredOn, ascending: false)) var expense: FetchedResults<ExpenseCD>
     
     @State private var filter: ExpenseCDFilterTime = .all
-    @State private var showingSheet = false
+    @State private var showFilterSheet = false
+    
+    @State private var showOptionsSheet = false
+    @State private var displayAbout = false
     @State private var displaySettings = false
     
     var body: some View {
@@ -25,14 +28,22 @@ struct ExpenseView: View {
                 
                 VStack {
                     NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {  })
-                    ToolbarModelView(title: "Dashboard", button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
-                        button1Method: { self.displaySettings = true }
-                        button2Method: { self.showingSheet = true }
-                        .actionSheet(isPresented: $showingSheet) {
+                    NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {  })
+                    ToolbarModelView(title: "Dashboard", hasBackButt: false, button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
+                        button1Method: { self.showOptionsSheet = true }
+                        button2Method: { self.showFilterSheet = true }
+                        .actionSheet(isPresented: $showFilterSheet) {
                             ActionSheet(title: Text("Select a filter"), buttons: [
                                     .default(Text("Overall")) { filter = .all },
                                     .default(Text("Last 7 days")) { filter = .week },
                                     .default(Text("Last 30 days")) { filter = .month },
+                                    .cancel()
+                            ])
+                        }
+                        .actionSheet(isPresented: $showOptionsSheet) {
+                            ActionSheet(title: Text("Select an option"), buttons: [
+                                    .default(Text("About")) { self.displayAbout = true },
+                                    .default(Text("Settings")) { self.displaySettings = true },
                                     .cancel()
                             ])
                         }
