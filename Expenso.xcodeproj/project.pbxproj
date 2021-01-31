@@ -32,6 +32,9 @@
 		738B1C6625C671A80067407B /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5C25C671A80067407B /* Inter-Light.ttf */; };
 		738B1C6725C671A80067407B /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5D25C671A80067407B /* Inter-Thin.ttf */; };
 		738B1C6825C671A80067407B /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C5E25C671A80067407B /* Inter-Regular.ttf */; };
+		738B1C6C25C673FC0067407B /* ExpenseCSVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C6B25C673FC0067407B /* ExpenseCSVModel.swift */; };
+		738B1C7025C674120067407B /* ExpenseSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C6F25C674120067407B /* ExpenseSettingsViewModel.swift */; };
+		738B1C7325C674320067407B /* ExpenseSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C7225C674320067407B /* ExpenseSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		738B1C5C25C671A80067407B /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
 		738B1C5D25C671A80067407B /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
 		738B1C5E25C671A80067407B /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		738B1C6B25C673FC0067407B /* ExpenseCSVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCSVModel.swift; sourceTree = "<group>"; };
+		738B1C6F25C674120067407B /* ExpenseSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSettingsViewModel.swift; sourceTree = "<group>"; };
+		738B1C7225C674320067407B /* ExpenseSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,7 @@
 		738B1C1625C65DFE0067407B /* Expenso */ = {
 			isa = PBXGroup;
 			children = (
+				738B1C6A25C673EB0067407B /* ExpenseSettings */,
 				738B1C5425C671680067407B /* Inter */,
 				738B1C3A25C662060067407B /* Helpers */,
 				738B1C3625C661580067407B /* Expense */,
@@ -162,6 +169,16 @@
 				738B1C5A25C671A80067407B /* OFL.txt */,
 			);
 			path = Inter;
+			sourceTree = "<group>";
+		};
+		738B1C6A25C673EB0067407B /* ExpenseSettings */ = {
+			isa = PBXGroup;
+			children = (
+				738B1C6B25C673FC0067407B /* ExpenseCSVModel.swift */,
+				738B1C6F25C674120067407B /* ExpenseSettingsViewModel.swift */,
+				738B1C7225C674320067407B /* ExpenseSettingsView.swift */,
+			);
+			path = ExpenseSettings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,10 +268,13 @@
 				738B1C4325C6629D0067407B /* ColorExtension.swift in Sources */,
 				738B1C4025C662890067407B /* InterFontModifier.swift in Sources */,
 				738B1C3C25C662580067407B /* Models.swift in Sources */,
+				738B1C7325C674320067407B /* ExpenseSettingsView.swift in Sources */,
 				738B1C4C25C663060067407B /* DismissKeyboard.swift in Sources */,
 				738B1C4625C662D90067407B /* TextView.swift in Sources */,
 				738B1C1825C65DFE0067407B /* ExpensoApp.swift in Sources */,
+				738B1C6C25C673FC0067407B /* ExpenseCSVModel.swift in Sources */,
 				738B1C4925C662F20067407B /* DropdownButton.swift in Sources */,
+				738B1C7025C674120067407B /* ExpenseSettingsViewModel.swift in Sources */,
 				738B1C2F25C65EF70067407B /* Configs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

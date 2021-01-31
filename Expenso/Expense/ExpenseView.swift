@@ -24,6 +24,7 @@ struct ExpenseView: View {
                 Color.primary_color.edgesIgnoringSafeArea(.all)
                 
                 VStack {
+                    NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {  })
                     ToolbarModelView(title: "Dashboard", button1Icon: IMAGE_SETTINGS_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.displaySettings = true }
                         button2Method: { self.showingSheet = true }
@@ -98,10 +99,6 @@ struct ExpenseMainView: View {
                 TextView(text: "Recent Transaction", type: .subtitle_1).foregroundColor(Color.text_primary_color)
                 Spacer()
             }.padding(4)
-            
-            ForEach(self.fetchRequest.wrappedValue) { expenseObj in
-                ExpenseTransView(expenseObj: expenseObj)
-            }
             
             Spacer().frame(height: 150)
             
