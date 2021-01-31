@@ -39,6 +39,16 @@ struct ExpenseView: View {
                     ExpenseMainView(filter: filter)
                     Spacer()
                 }.edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: NavigationLazyView(AddExpenseView()),
+                                       label: { Image("plus_icon").resizable().frame(width: 32.0, height: 32.0) })
+                        .padding().background(Color.main_color).cornerRadius(35)
+                    }
+                }.padding()
             }
             .navigationBarHidden(true)
         }
@@ -99,6 +109,10 @@ struct ExpenseMainView: View {
                 TextView(text: "Recent Transaction", type: .subtitle_1).foregroundColor(Color.text_primary_color)
                 Spacer()
             }.padding(4)
+            
+            ForEach(self.fetchRequest.wrappedValue) { expenseObj in
+                ExpenseTransView(expenseObj: expenseObj)
+            }
             
             Spacer().frame(height: 150)
             
