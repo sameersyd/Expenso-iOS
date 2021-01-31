@@ -30,21 +30,25 @@ class ExpenseSettingsViewModel: ObservableObject {
         var results: [ExpenseCD]
         do {
             results = try moc.fetch(request) as! [ExpenseCD]
-            for i in results {
-                let csvModel = ExpenseCSVModel()
-                csvModel.title = i.title ?? ""
-                csvModel.amount = "\(currency)\(i.amount)"
-                csvModel.transactionType = "\(i.type == TRANS_TYPE_INCOME ? "INCOME" : "EXPENSE")"
-                csvModel.tag = getTransTagTitle(transTag: i.tag ?? "")
-                csvModel.occuredOn = "\(getDateFormatter(date: i.occuredOn, format: "yyyy-mm-dd hh:mm a"))"
-                csvModel.note = i.note ?? ""
-                csvModelArr.append(csvModel)
+            if results.count <= 0 {
+                alertMsg = "No data to export"
+                showAlert = true
+            } else {
+                for i in results {
+                    let csvModel = ExpenseCSVModel()
+                    csvModel.title = i.title ?? ""
+                    csvModel.amount = "\(currency)\(i.amount)"
+                    csvModel.transactionType = "\(i.type == TRANS_TYPE_INCOME ? "INCOME" : "EXPENSE")"
+                    csvModel.tag = getTransTagTitle(transTag: i.tag ?? "")
+                    csvModel.occuredOn = "\(getDateFormatter(date: i.occuredOn, format: "yyyy-mm-dd hh:mm a"))"
+                    csvModel.note = i.note ?? ""
+                    csvModelArr.append(csvModel)
+                }
+                creatCSV()
             }
-            creatCSV()
         } catch { alertMsg = "\(error)"; showAlert = true }
     }
     
-    // MARK: CSV file creating
     func creatCSV() {
         
         let fileName = "Expense.csv"
@@ -52,8 +56,8 @@ class ExpenseSettingsViewModel: ObservableObject {
         var csvText = "Title,Amount,Type,Tag,Occured On,Note\n"
         
         for csvModel in csvModelArr {
-            let newLine = "\"\(csvModel.title)\",\"\(csvModel.amount)\",\"\(csvModel.transactionType)\",\"\(csvModel.tag)\",\"\(csvModel.occuredOn)\",\"\(csvModel.note)\"\n"
-            csvText.append(newLine)
+            let row = "\"\(csvModel.title)\",\"\(csvModel.amount)\",\"\(csvModel.transactionType)\",\"\(csvModel.tag)\",\"\(csvModel.occuredOn)\",\"\(csvModel.note)\"\n"
+            csvText.append(row)
         }
         
         do {

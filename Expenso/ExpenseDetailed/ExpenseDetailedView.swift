@@ -26,33 +26,35 @@ struct ExpenseDetailedView: View {
             ZStack {
                 Color.primary_color.edgesIgnoringSafeArea(.all)
                 
-                ScrollView(showsIndicators: false) {
+                VStack {
                     
                     ToolbarModelView(title: "Details", button1Icon: IMAGE_DELETE_ICON, button2Icon: IMAGE_SHARE_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.confirmDelete = true }
                         button2Method: { viewModel.shareNote() }
                     
-                    VStack(spacing: 24) {
-                        ExpenseDetailedListView(title: "Title", description: viewModel.expenseObj.title ?? "")
-                        ExpenseDetailedListView(title: "Amount", description: "\(viewModel.expenseObj.amount)")
-                        ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense" )
-                        ExpenseDetailedListView(title: "Tag", description: getTransTagTitle(transTag: viewModel.expenseObj.tag ?? ""))
-                        ExpenseDetailedListView(title: "When", description: getDateFormatter(date: viewModel.expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))
-                        ExpenseDetailedListView(title: "Note", description: viewModel.expenseObj.note ?? "")
-                    }.padding(16)
-                    
-                    Spacer().frame(height: 24)
-                    Spacer()
-                }
-                .edgesIgnoringSafeArea(.all)
-                .alert(isPresented: $confirmDelete,
-                            content: {
-                                Alert(title: Text(APP_NAME), message: Text("Are you sure you want to delete this transaction?"),
-                                    primaryButton: .destructive(Text("Delete")) {
-                                        viewModel.deleteNote(managedObjectContext: managedObjectContext)
-                                    }, secondaryButton: Alert.Button.cancel(Text("Cancel"), action: { confirmDelete = false })
-                                )
-                            })
+                    ScrollView(showsIndicators: false) {
+                        
+                        VStack(spacing: 24) {
+                            ExpenseDetailedListView(title: "Title", description: viewModel.expenseObj.title ?? "")
+                            ExpenseDetailedListView(title: "Amount", description: "\(viewModel.expenseObj.amount)")
+                            ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense" )
+                            ExpenseDetailedListView(title: "Tag", description: getTransTagTitle(transTag: viewModel.expenseObj.tag ?? ""))
+                            ExpenseDetailedListView(title: "When", description: getDateFormatter(date: viewModel.expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))
+                            ExpenseDetailedListView(title: "Note", description: viewModel.expenseObj.note ?? "")
+                        }.padding(16)
+                        
+                        Spacer().frame(height: 24)
+                        Spacer()
+                    }
+                    .alert(isPresented: $confirmDelete,
+                                content: {
+                                    Alert(title: Text(APP_NAME), message: Text("Are you sure you want to delete this transaction?"),
+                                        primaryButton: .destructive(Text("Delete")) {
+                                            viewModel.deleteNote(managedObjectContext: managedObjectContext)
+                                        }, secondaryButton: Alert.Button.cancel(Text("Cancel"), action: { confirmDelete = false })
+                                    )
+                                })
+                }.edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()
