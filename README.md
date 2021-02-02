@@ -43,9 +43,13 @@ A Simple Expense Tracker App 📱 built to demonstrate the use of SwiftUI, CoreD
 If you want to contribute to this library, you're always welcome!
 See [Contributing Guidelines](https://github.com/sameersyd/Expenso/blob/main/CONTRIBUTION.md). 
 
+
+## Checkout Android version of this app <a href="https://github.com/Spikeysanju/Expenso">Expenso</a>
+#### Design Inspired from <a href="https://github.com/Spikeysanju">@Spikeysanju</a>
+
 ## Contact
 Have an project? DM us at 👇
-
+<br />
 Drop a mail to:- sameer.nwaz@gmail.com
 
 
