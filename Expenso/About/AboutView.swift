@@ -30,7 +30,7 @@ struct AboutView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             HStack { Spacer() }
                             TextView(text: "ATTRIBUTIONS & LICENSE", type: .overline).foregroundColor(Color.text_primary_color)
-                            TextView(text: "Licensed Under MIT License", type: .body_2)
+                            TextView(text: "Licensed Under Apache License 2.0", type: .body_2)
                                 .foregroundColor(Color.text_secondary_color).padding(.top, 2)
                         }
                         VStack(alignment: .leading, spacing: 4) {

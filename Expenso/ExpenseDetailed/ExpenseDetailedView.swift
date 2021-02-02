@@ -10,12 +10,13 @@ import SwiftUI
 struct ExpenseDetailedView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @ObservedObject private var viewModel: ExpenseDetailedViewModel
-    
-    @State private var confirmDelete = false
     // CoreData
     @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @ObservedObject private var viewModel: ExpenseDetailedViewModel
+    @AppStorage(UD_EXPENSE_CURRENCY) var CURRENCY: String = ""
+    
+    @State private var confirmDelete = false
     
     init(expenseObj: ExpenseCD) {
         viewModel = ExpenseDetailedViewModel(expenseObj: expenseObj)
@@ -36,7 +37,7 @@ struct ExpenseDetailedView: View {
                         
                         VStack(spacing: 24) {
                             ExpenseDetailedListView(title: "Title", description: viewModel.expenseObj.title ?? "")
-                            ExpenseDetailedListView(title: "Amount", description: "\(viewModel.expenseObj.amount)")
+                            ExpenseDetailedListView(title: "Amount", description: "\(CURRENCY)\(viewModel.expenseObj.amount)")
                             ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense" )
                             ExpenseDetailedListView(title: "Tag", description: getTransTagTitle(transTag: viewModel.expenseObj.tag ?? ""))
                             ExpenseDetailedListView(title: "When", description: getDateFormatter(date: viewModel.expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))

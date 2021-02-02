@@ -29,7 +29,7 @@ struct ExpenseSettingsView: View {
                         Button(action: { selectCurrency = true }, label: {
                             HStack {
                                 Spacer()
-                                TextView(text: "CURRENCY - \(viewModel.currency)", type: .button).foregroundColor(.white)
+                                TextView(text: "CURRENCY - \(viewModel.currency)", type: .button).foregroundColor(Color.text_primary_color)
                                 Spacer()
                             }
                         })
@@ -49,7 +49,7 @@ struct ExpenseSettingsView: View {
                         Button(action: { viewModel.exportTransactions(moc: managedObjectContext) }, label: {
                             HStack {
                                 Spacer()
-                                TextView(text: "Export transactions", type: .button).foregroundColor(.white)
+                                TextView(text: "Export transactions", type: .button).foregroundColor(Color.text_primary_color)
                                 Spacer()
                             }
                         })
