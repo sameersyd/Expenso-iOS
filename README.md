@@ -5,6 +5,28 @@ A Simple Expense Tracker App 📱 built to demonstrate the use of SwiftUI, CoreD
 
 <br />
 
+## UI Design 🎨
+
+***Click to View Expenso app Design from below 👇***
+
+[![Expenso](https://img.shields.io/badge/Expenso-FIGMA-black.svg?style=for-the-badge&logo=figma)](https://www.figma.com/file/Z5KMfiwo9RYtYBUMRSIfHh/Expense-Tracker-App?node-id=140%3A1016)
+
+<br />
+
+## Light Mode 🌞
+Dashboard | All Income | All Expense | Details | Add Transaction 
+--- | --- | --- |--- |--- 
+![](https://github.com/sameersyd/Expenso/blob/main/art/dashboard.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/income.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/expense.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/details.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/add_transaction.png) 
+
+<br />
+
+## Dark Mode 🌚
+Dashboard | All Income | All Expense | Details | Add Transaction 
+--- | --- | --- |--- |--- 
+![](https://github.com/sameersyd/Expenso/blob/main/art/dashboard_dark.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/income_dark.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/expense_dark.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/details_dark.png) | ![](https://github.com/sameersyd/Expenso/blob/main/art/add_transaction_dark.png) 
+
+<br />
+
 ## Built With 🛠
 - [SwiftUI](https://developer.apple.com/documentation/swiftui/) - SwiftUI is an innovative, exceptionally simple way to build user interfaces across all Apple platforms with the power of Swift.
 - [CoreData](https://developer.apple.com/documentation/coredata) - Framework used to manage the model layer objects in the application.
@@ -46,12 +68,6 @@ See [Contributing Guidelines](https://github.com/sameersyd/Expenso/blob/main/CON
 
 #### Checkout Android version of this app <a href="https://github.com/Spikeysanju/Expenso">Expenso</a>
 #### Design Inspired from <a href="https://github.com/Spikeysanju">@Spikeysanju</a>
-
-## Contact
-Have an project? DM us at 👇
-<br />
-Drop a mail to:- sameer.nwaz@gmail.com
-
 
 ## Donation
 If this project helped you reduce time to develop, you can buy me a cup of coffee :) 
