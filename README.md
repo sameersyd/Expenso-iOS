@@ -62,7 +62,7 @@ Dashboard | All Income | All Expense | Details | Add Transaction
 <br />
 
 ## Contribute
-If you want to contribute to this library, you're always welcome!
+If you want to contribute to this app, you're always welcome!
 See [Contributing Guidelines](https://github.com/sameersyd/Expenso/blob/main/CONTRIBUTION.md). 
 
 
