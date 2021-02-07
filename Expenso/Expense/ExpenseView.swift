@@ -123,8 +123,12 @@ struct ExpenseMainView: View {
                 Spacer()
             }.padding(4)
             
-            ForEach(self.fetchRequest.wrappedValue) { expenseObj in
-                NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
+            if fetchRequest.wrappedValue.isEmpty {
+                LottieView().frame(width: 300, height: 300)
+            } else {
+                ForEach(self.fetchRequest.wrappedValue) { expenseObj in
+                    NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
+                }
             }
             
             Spacer().frame(height: 150)
