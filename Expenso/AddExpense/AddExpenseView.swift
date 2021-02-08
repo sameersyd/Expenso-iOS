@@ -167,6 +167,7 @@ struct AddExpenseView: View {
             .navigationBarHidden(true)
         }
         .dismissKeyboardOnTap()
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .onReceive(addExpenseViewModel.$closePresenter) { close in

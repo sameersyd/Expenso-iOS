@@ -7,40 +7,12 @@
 
 import UIKit
 import SwiftUI
-import Lottie
 
 // Lazy Navigation to load (constructor) after clicked on Button
 struct NavigationLazyView<Content: View>: View {
     let build: () -> Content
     init(_ build: @autoclosure @escaping () -> Content) { self.build = build }
     var body: Content { build() }
-}
-
-struct LottieView: UIViewRepresentable {
-    
-    let animationView = AnimationView()
-    var filename = "empty-face"
-    
-    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
-        
-        let view = UIView()
-        let animation = Animation.named(filename)
-        animationView.animation = animation
-        animationView.contentMode = .scaleAspectFit
-        animationView.play()
-        
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(animationView)
-        
-        NSLayoutConstraint.activate([
-            animationView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            animationView.widthAnchor.constraint(equalTo: view.widthAnchor)
-        ])
-        
-        return view
-    }
-    
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {}
 }
 
 struct ToolbarModelView: View {

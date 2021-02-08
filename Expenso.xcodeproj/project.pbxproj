@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		736C720A25CFD89900720DEA /* empty-face.json in Resources */ = {isa = PBXBuildFile; fileRef = 736C720925CFD89900720DEA /* empty-face.json */; };
+		736C721B25CFE8E200720DEA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736C721A25CFE8E200720DEA /* LottieView.swift */; };
 		738B1C1825C65DFE0067407B /* ExpensoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C1725C65DFE0067407B /* ExpensoApp.swift */; };
 		738B1C1C25C65E060067407B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C1B25C65E060067407B /* Assets.xcassets */; };
 		738B1C1F25C65E060067407B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C1E25C65E060067407B /* Preview Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Expenso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2D1600DAC62FA04EDCF170 /* Pods-Expenso.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.debug.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.debug.xcconfig"; sourceTree = "<group>"; };
 		736C720925CFD89900720DEA /* empty-face.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "empty-face.json"; sourceTree = "<group>"; };
+		736C721A25CFE8E200720DEA /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		738B1C1425C65DFE0067407B /* Expenso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Expenso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		738B1C1725C65DFE0067407B /* ExpensoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensoApp.swift; sourceTree = "<group>"; };
 		738B1C1B25C65E060067407B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				738B1C4B25C663060067407B /* DismissKeyboard.swift */,
 				738B1C4E25C663180067407B /* DateExtension.swift */,
 				738B1C5125C6632F0067407B /* HelperMethods.swift */,
+				736C721A25CFE8E200720DEA /* LottieView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				738B1C4925C662F20067407B /* DropdownButton.swift in Sources */,
 				738B1C7025C674120067407B /* ExpenseSettingsViewModel.swift in Sources */,
 				738B1C2F25C65EF70067407B /* Configs.swift in Sources */,
+				736C721B25CFE8E200720DEA /* LottieView.swift in Sources */,
 				738B1C7725C675200067407B /* AddExpenseView.swift in Sources */,
 				738B1C8025C6763E0067407B /* ExpenseDetailedView.swift in Sources */,
 			);

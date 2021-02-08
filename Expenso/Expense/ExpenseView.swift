@@ -63,6 +63,7 @@ struct ExpenseView: View {
             }
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -124,7 +125,7 @@ struct ExpenseMainView: View {
             }.padding(4)
             
             if fetchRequest.wrappedValue.isEmpty {
-                LottieView().frame(width: 300, height: 300)
+                LottieView(animType: .empty_face).frame(width: 300, height: 300)
             } else {
                 ForEach(self.fetchRequest.wrappedValue) { expenseObj in
                     NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
