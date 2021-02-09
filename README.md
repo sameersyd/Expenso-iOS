@@ -7,7 +7,7 @@ A Simple Expense Tracker App 📱 built to demonstrate the use of SwiftUI, CoreD
 
 ## UI Design 🎨
 
-The Design for this Expenso App was designed by <a href="https://github.com/Spikeysanju">@Spikeysanju</a>
+The UI/UX for this Expenso App was designed by <a href="https://github.com/Spikeysanju">@Spikeysanju</a>
 
 ***Click to View Expenso app Design from below 👇***
 
