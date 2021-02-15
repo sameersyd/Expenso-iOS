@@ -15,7 +15,7 @@ struct AddExpenseView: View {
     @State private var confirmDelete = false
     @State var showAttachSheet = false
     
-    @ObservedObject var viewModel = AddExpenseViewModel()
+    @StateObject var viewModel: AddExpenseViewModel
     
     let typeOptions = [
         DropdownOption(key: TRANS_TYPE_INCOME, val: "Income"),
@@ -34,26 +34,6 @@ struct AddExpenseView: View {
         DropdownOption(key: TRANS_TAG_OTHERS, val: "Others"),
         DropdownOption(key: TRANS_TAG_UTILITIES, val: "Utilities")
     ]
-    
-    init(expenseObj: ExpenseCD? = nil) {
-        viewModel.expenseObj = expenseObj
-        viewModel.title = expenseObj?.title ?? ""
-        if let expenseObj = expenseObj {
-            viewModel.amount = String(expenseObj.amount)
-            viewModel.typeTitle = expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense"
-        } else {
-            viewModel.amount = ""
-            viewModel.typeTitle = "Income"
-        }
-        viewModel.occuredOn = expenseObj?.occuredOn ?? Date()
-        viewModel.note = expenseObj?.note ?? ""
-        viewModel.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
-        viewModel.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
-        viewModel.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
-        if let data = expenseObj?.imageAttached {
-            viewModel.imageAttached = UIImage(data: data)
-        }
-    }
     
     var body: some View {
         NavigationView {
@@ -202,8 +182,8 @@ struct AddExpenseView: View {
     }
 }
 
-struct AddExpenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddExpenseView()
-    }
-}
+//struct AddExpenseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddExpenseView()
+//    }
+//}

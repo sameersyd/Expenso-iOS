@@ -31,7 +31,26 @@ class AddExpenseViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var closePresenter = false
     
-    init() {
+    init(expenseObj: ExpenseCD? = nil) {
+        
+        self.expenseObj = expenseObj
+        self.title = expenseObj?.title ?? ""
+        if let expenseObj = expenseObj {
+            self.amount = String(expenseObj.amount)
+            self.typeTitle = expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense"
+        } else {
+            self.amount = ""
+            self.typeTitle = "Income"
+        }
+        self.occuredOn = expenseObj?.occuredOn ?? Date()
+        self.note = expenseObj?.note ?? ""
+        self.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
+        self.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
+        self.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
+        if let data = expenseObj?.imageAttached {
+            self.imageAttached = UIImage(data: data)
+        }
+        
         AttachmentHandler.shared.imagePickedBlock = { [weak self] image in
             self?.imageUpdated = true
             self?.imageAttached = image
@@ -50,6 +69,7 @@ class AddExpenseViewModel: ObservableObject {
     
     func saveTransaction(managedObjectContext: NSManagedObjectContext) {
         
+        let expense: ExpenseCD
         let titleStr = title.trimmingCharacters(in: .whitespacesAndNewlines)
         let amountStr = amount.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -57,18 +77,15 @@ class AddExpenseViewModel: ObservableObject {
             alertMsg = "Enter Title"; showAlert = true
             return
         }
-        
         if amountStr.isEmpty || amountStr == "" {
             alertMsg = "Enter Amount"; showAlert = true
             return
         }
-        
         guard let amount = Double(amountStr) else {
             alertMsg = "Enter valid number"; showAlert = true
             return
         }
         
-        let expense: ExpenseCD
         if expenseObj != nil {
             
             expense = expenseObj!

@@ -74,7 +74,7 @@ struct ExpenseDetailedView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(destination: AddExpenseView(expenseObj: viewModel.expenseObj), label: {
+                        NavigationLink(destination: AddExpenseView(viewModel: AddExpenseViewModel(expenseObj: viewModel.expenseObj)), label: {
                             Image("pencil_icon").resizable().frame(width: 28.0, height: 28.0)
                             Text("Edit").modifier(InterFont(.semiBold, size: 18)).foregroundColor(.white)
                         })
