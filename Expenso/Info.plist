@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Your camera is used to attach media files to your transactions</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Photo library is used to attach media files to your transactions</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library is used to attach media files to your transactions</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Black.ttf</string>

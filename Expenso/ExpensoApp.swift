@@ -18,7 +18,7 @@ struct ExpensoApp: App {
     private func setDefaultPreferences() {
         let currency = UserDefaults.standard.string(forKey: UD_EXPENSE_CURRENCY)
         if currency == nil {
-            UserDefaults.standard.set("₹", forKey: UD_EXPENSE_CURRENCY)
+            UserDefaults.standard.set("$", forKey: UD_EXPENSE_CURRENCY)
         }
     }
     

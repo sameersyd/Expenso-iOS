@@ -41,7 +41,20 @@ struct ExpenseDetailedView: View {
                             ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense" )
                             ExpenseDetailedListView(title: "Tag", description: getTransTagTitle(transTag: viewModel.expenseObj.tag ?? ""))
                             ExpenseDetailedListView(title: "When", description: getDateFormatter(date: viewModel.expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))
-                            ExpenseDetailedListView(title: "Note", description: viewModel.expenseObj.note ?? "")
+                            if let note = viewModel.expenseObj.note, note != "" {
+                                ExpenseDetailedListView(title: "Note", description: note)
+                            }
+                            if let data = viewModel.expenseObj.imageAttached {
+                                VStack(spacing: 8) {
+                                    HStack { TextView(text: "Attachment", type: .caption).foregroundColor(Color.init(hex: "828282")); Spacer() }
+                                    Image(uiImage: UIImage(data: data)!)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: 250).frame(maxWidth: .infinity)
+                                        .background(Color.secondary_color)
+                                        .cornerRadius(4)
+                                }
+                            }
                         }.padding(16)
                         
                         Spacer().frame(height: 24)
