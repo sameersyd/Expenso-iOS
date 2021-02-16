@@ -7,17 +7,64 @@
 
 import UIKit
 import CoreData
+import LocalAuthentication
 
 class ExpenseSettingsViewModel: ObservableObject {
     
     var csvModelArr = [ExpenseCSVModel]()
     
-    @Published var currency = String()
+    @Published var currency = UserDefaults.standard.string(forKey: UD_EXPENSE_CURRENCY) ?? ""
+    @Published var enableBiometric = UserDefaults.standard.bool(forKey: UD_USE_BIOMETRIC) {
+        didSet {
+            if enableBiometric { authBiometric() }
+            else { UserDefaults.standard.setValue(false, forKey: UD_USE_BIOMETRIC) }
+        }
+    }
+    
     @Published var alertMsg = String()
     @Published var showAlert = false
     
-    init() {
-        currency = UserDefaults.standard.string(forKey: UD_EXPENSE_CURRENCY) ?? ""
+    init() {}
+    
+    func authBiometric() {
+        let scanner = LAContext()
+        var error: NSError?
+        if scanner.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            scanner.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "To Unlock \(APP_NAME)") { (status, err) in
+                if let err = err {
+                    DispatchQueue.main.async {
+                        self.enableBiometric = false
+                        self.alertMsg = err.localizedDescription
+                        self.showAlert = true
+                    }
+                } else { UserDefaults.standard.setValue(true, forKey: UD_USE_BIOMETRIC) }
+            }
+        } else if scanner.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            scanner.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "To Unlock \(APP_NAME)") { (status, err) in
+                if let err = err {
+                    DispatchQueue.main.async {
+                        self.enableBiometric = false
+                        self.alertMsg = err.localizedDescription
+                        self.showAlert = true
+                    }
+                } else { UserDefaults.standard.setValue(true, forKey: UD_USE_BIOMETRIC) }
+            }
+        }
+    }
+    
+    func getBiometricType() -> String {
+        if #available(iOS 11.0, *) {
+            let context = LAContext()
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                switch context.biometryType {
+                    case .faceID: return "Face ID"
+                    case .touchID: return "Touch ID"
+                    case .none: return "App Lock"
+                    @unknown default: return "App Lock"
+                }
+            }
+        }
+        return "App Lock"
     }
     
     func saveCurrency(currency: String) {
@@ -30,10 +77,8 @@ class ExpenseSettingsViewModel: ObservableObject {
         var results: [ExpenseCD]
         do {
             results = try moc.fetch(request) as! [ExpenseCD]
-            if results.count <= 0 {
-                alertMsg = "No data to export"
-                showAlert = true
-            } else {
+            if results.count <= 0 { alertMsg = "No data to export"; showAlert = true }
+            else {
                 for i in results {
                     let csvModel = ExpenseCSVModel()
                     csvModel.title = i.title ?? ""
@@ -44,12 +89,12 @@ class ExpenseSettingsViewModel: ObservableObject {
                     csvModel.note = i.note ?? ""
                     csvModelArr.append(csvModel)
                 }
-                creatCSV()
+                self.generateCSV()
             }
         } catch { alertMsg = "\(error)"; showAlert = true }
     }
     
-    func creatCSV() {
+    func generateCSV() {
         
         let fileName = "Expense.csv"
         let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)

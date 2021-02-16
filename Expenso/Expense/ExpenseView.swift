@@ -27,8 +27,8 @@ struct ExpenseView: View {
                 Color.primary_color.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {  })
-                    NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {  })
+                    NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {})
+                    NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {})
                     ToolbarModelView(title: "Dashboard", hasBackButt: false, button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.showOptionsSheet = true }
                         button2Method: { self.showFilterSheet = true }
