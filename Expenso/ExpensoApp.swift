@@ -18,14 +18,19 @@ struct ExpensoApp: App {
     private func setDefaultPreferences() {
         let currency = UserDefaults.standard.string(forKey: UD_EXPENSE_CURRENCY)
         if currency == nil {
-            UserDefaults.standard.set("₹", forKey: UD_EXPENSE_CURRENCY)
+            UserDefaults.standard.set("$", forKey: UD_EXPENSE_CURRENCY)
         }
     }
     
     var body: some Scene {
         WindowGroup {
-            ExpenseView()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
+            if UserDefaults.standard.bool(forKey: UD_USE_BIOMETRIC) {
+                AuthenticateView()
+                    .environment(\.managedObjectContext, persistentContainer.viewContext)
+            } else {
+                ExpenseView()
+                    .environment(\.managedObjectContext, persistentContainer.viewContext)
+            }
         }
     }
     

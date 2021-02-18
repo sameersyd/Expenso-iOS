@@ -12,10 +12,10 @@ struct AddExpenseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // CoreData
     @Environment(\.managedObjectContext) var managedObjectContext
-    
     @State private var confirmDelete = false
+    @State var showAttachSheet = false
     
-    @ObservedObject var addExpenseViewModel = AddExpenseViewModel()
+    @StateObject var viewModel: AddExpenseViewModel
     
     let typeOptions = [
         DropdownOption(key: TRANS_TYPE_INCOME, val: "Income"),
@@ -35,23 +35,6 @@ struct AddExpenseView: View {
         DropdownOption(key: TRANS_TAG_UTILITIES, val: "Utilities")
     ]
     
-    init(expenseObj: ExpenseCD? = nil) {
-        addExpenseViewModel.expenseObj = expenseObj
-        addExpenseViewModel.title = expenseObj?.title ?? ""
-        if let expenseObj = expenseObj {
-            addExpenseViewModel.amount = String(expenseObj.amount)
-            addExpenseViewModel.typeTitle = expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense"
-        } else {
-            addExpenseViewModel.amount = ""
-            addExpenseViewModel.typeTitle = "Income"
-        }
-        addExpenseViewModel.occuredOn = expenseObj?.occuredOn ?? Date()
-        addExpenseViewModel.note = expenseObj?.note ?? ""
-        addExpenseViewModel.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
-        addExpenseViewModel.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
-        addExpenseViewModel.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
-    }
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -60,7 +43,7 @@ struct AddExpenseView: View {
                 VStack {
                     
                     Group {
-                        if addExpenseViewModel.expenseObj == nil {
+                        if viewModel.expenseObj == nil {
                             ToolbarModelView(title: "Add Transaction") { self.presentationMode.wrappedValue.dismiss() }
                         } else {
                             ToolbarModelView(title: "Edit Transaction", button1Icon: IMAGE_DELETE_ICON) { self.presentationMode.wrappedValue.dismiss() }
@@ -70,7 +53,7 @@ struct AddExpenseView: View {
                             content: {
                                 Alert(title: Text(APP_NAME), message: Text("Are you sure you want to delete this transaction?"),
                                     primaryButton: .destructive(Text("Delete")) {
-                                        addExpenseViewModel.deleteTransaction(managedObjectContext: self.managedObjectContext)
+                                        viewModel.deleteTransaction(managedObjectContext: self.managedObjectContext)
                                     }, secondaryButton: Alert.Button.cancel(Text("Cancel"), action: { confirmDelete = false })
                                 )
                             })
@@ -79,72 +62,95 @@ struct AddExpenseView: View {
                         
                         VStack(spacing: 12) {
                             
-                            TextField("Title", text: $addExpenseViewModel.title)
+                            TextField("Title", text: $viewModel.title)
                                 .modifier(InterFont(.regular, size: 16))
                                 .accentColor(Color.text_primary_color)
-                                .frame(height: 50)
-                                .padding(.leading, 16)
+                                .frame(height: 50).padding(.leading, 16)
                                 .background(Color.secondary_color)
                                 .cornerRadius(4)
                             
-                            TextField("Amount", text: $addExpenseViewModel.amount)
+                            TextField("Amount", text: $viewModel.amount)
                                 .modifier(InterFont(.regular, size: 16))
                                 .accentColor(Color.text_primary_color)
-                                .frame(height: 50)
-                                .padding(.leading, 16)
+                                .frame(height: 50).padding(.leading, 16)
                                 .background(Color.secondary_color)
-                                .cornerRadius(4)
-                                .keyboardType(.decimalPad)
+                                .cornerRadius(4).keyboardType(.decimalPad)
                             
-                            DropdownButton(shouldShowDropdown: $addExpenseViewModel.showTypeDrop, displayText: $addExpenseViewModel.typeTitle,
+                            DropdownButton(shouldShowDropdown: $viewModel.showTypeDrop, displayText: $viewModel.typeTitle,
                                            options: typeOptions, mainColor: Color.text_primary_color,
                                            backgroundColor: Color.secondary_color, cornerRadius: 4, buttonHeight: 50) { key in
                                 let selectedObj = typeOptions.filter({ $0.key == key }).first
                                 if let object = selectedObj {
-                                    addExpenseViewModel.typeTitle = object.val
-                                    addExpenseViewModel.selectedType = key
+                                    viewModel.typeTitle = object.val
+                                    viewModel.selectedType = key
                                 }
-                                addExpenseViewModel.showTypeDrop = false
+                                viewModel.showTypeDrop = false
                             }
                             
-                            DropdownButton(shouldShowDropdown: $addExpenseViewModel.showTagDrop, displayText: $addExpenseViewModel.tagTitle,
+                            DropdownButton(shouldShowDropdown: $viewModel.showTagDrop, displayText: $viewModel.tagTitle,
                                            options: tagOptions, mainColor: Color.text_primary_color,
                                            backgroundColor: Color.secondary_color, cornerRadius: 4, buttonHeight: 50) { key in
                                 let selectedObj = tagOptions.filter({ $0.key == key }).first
                                 if let object = selectedObj {
-                                    addExpenseViewModel.tagTitle = object.val
-                                    addExpenseViewModel.selectedTag = key
+                                    viewModel.tagTitle = object.val
+                                    viewModel.selectedTag = key
                                 }
-                                addExpenseViewModel.showTagDrop = false
+                                viewModel.showTagDrop = false
                             }
                             
                             HStack {
-                                DatePicker("PickerView", selection: $addExpenseViewModel.occuredOn,
+                                DatePicker("PickerView", selection: $viewModel.occuredOn,
                                            displayedComponents: [.date, .hourAndMinute]).labelsHidden().padding(.leading, 16)
                                 Spacer()
                             }
-                            .frame(height: 50)
-                            .frame(maxWidth: .infinity)
+                            .frame(height: 50).frame(maxWidth: .infinity)
                             .accentColor(Color.text_primary_color)
-                            .background(Color.secondary_color)
-                            .cornerRadius(4)
+                            .background(Color.secondary_color).cornerRadius(4)
                             
-                            TextField("Note", text: $addExpenseViewModel.note)
+                            TextField("Note", text: $viewModel.note)
                                 .modifier(InterFont(.regular, size: 16))
                                 .accentColor(Color.text_primary_color)
-                                .frame(height: 50)
-                                .padding(.leading, 16)
+                                .frame(height: 50).padding(.leading, 16)
                                 .background(Color.secondary_color)
                                 .cornerRadius(4)
                             
+                            Button(action: { viewModel.attachImage() }, label: {
+                                HStack {
+                                    Image(systemName: "paperclip")
+                                        .font(.system(size: 18.0, weight: .bold))
+                                        .foregroundColor(Color.text_secondary_color)
+                                        .padding(.leading, 16)
+                                    TextView(text: "Attach an image", type: .button).foregroundColor(Color.text_secondary_color)
+                                    Spacer()
+                                }
+                            })
+                            .frame(height: 50).frame(maxWidth: .infinity)
+                            .background(Color.secondary_color)
+                            .cornerRadius(4)
+                            .actionSheet(isPresented: $showAttachSheet) {
+                                ActionSheet(title: Text("Do you want to remove the attachment?"), buttons: [
+                                    .default(Text("Remove")) { viewModel.removeImage() },
+                                    .cancel()
+                                ])
+                            }
+                            
+                            if let image = viewModel.imageAttached {
+                                Button(action: { showAttachSheet = true }, label: {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: 250).frame(maxWidth: .infinity)
+                                        .background(Color.secondary_color)
+                                        .cornerRadius(4)
+                                })
+                            }
+                            
                             Spacer().frame(height: 150)
-                            
                             Spacer()
-                            
                         }
                         .frame(maxWidth: .infinity).padding(.horizontal, 8)
-                        .alert(isPresented: $addExpenseViewModel.showAlert,
-                                            content: { Alert(title: Text(APP_NAME), message: Text(addExpenseViewModel.alertMsg), dismissButton: .default(Text("OK"))) })
+                        .alert(isPresented: $viewModel.showAlert,
+                               content: { Alert(title: Text(APP_NAME), message: Text(viewModel.alertMsg), dismissButton: .default(Text("OK"))) })
                     }
                     
                 }.edgesIgnoringSafeArea(.top)
@@ -152,10 +158,10 @@ struct AddExpenseView: View {
                 VStack {
                     Spacer()
                     VStack {
-                        Button(action: { addExpenseViewModel.saveTransaction(managedObjectContext: managedObjectContext) }, label: {
+                        Button(action: { viewModel.saveTransaction(managedObjectContext: managedObjectContext) }, label: {
                             HStack {
                                 Spacer()
-                                TextView(text: addExpenseViewModel.getButtText(), type: .button).foregroundColor(.white)
+                                TextView(text: viewModel.getButtText(), type: .button).foregroundColor(.white)
                                 Spacer()
                             }
                         })
@@ -170,14 +176,14 @@ struct AddExpenseView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .onReceive(addExpenseViewModel.$closePresenter) { close in
+        .onReceive(viewModel.$closePresenter) { close in
             if close { self.presentationMode.wrappedValue.dismiss() }
         }
     }
 }
 
-struct AddExpenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddExpenseView()
-    }
-}
+//struct AddExpenseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddExpenseView()
+//    }
+//}

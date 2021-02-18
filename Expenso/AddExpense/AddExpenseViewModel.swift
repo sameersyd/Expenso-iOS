@@ -5,7 +5,7 @@
 //  Created by Sameer Nawaz on 31/01/21.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 class AddExpenseViewModel: ObservableObject {
@@ -24,11 +24,38 @@ class AddExpenseViewModel: ObservableObject {
     @Published var selectedType = TRANS_TYPE_INCOME
     @Published var selectedTag = TRANS_TAG_TRANSPORT
     
+    @Published var imageUpdated = false // When transaction edit, check if attachment is updated?
+    @Published var imageAttached: UIImage? = nil
+    
     @Published var alertMsg = String()
     @Published var showAlert = false
     @Published var closePresenter = false
     
-    init() {  }
+    init(expenseObj: ExpenseCD? = nil) {
+        
+        self.expenseObj = expenseObj
+        self.title = expenseObj?.title ?? ""
+        if let expenseObj = expenseObj {
+            self.amount = String(expenseObj.amount)
+            self.typeTitle = expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense"
+        } else {
+            self.amount = ""
+            self.typeTitle = "Income"
+        }
+        self.occuredOn = expenseObj?.occuredOn ?? Date()
+        self.note = expenseObj?.note ?? ""
+        self.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
+        self.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
+        self.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
+        if let data = expenseObj?.imageAttached {
+            self.imageAttached = UIImage(data: data)
+        }
+        
+        AttachmentHandler.shared.imagePickedBlock = { [weak self] image in
+            self?.imageUpdated = true
+            self?.imageAttached = image
+        }
+    }
     
     func getButtText() -> String {
         if selectedType == TRANS_TYPE_INCOME { return "\(expenseObj == nil ? "ADD" : "EDIT") INCOME" }
@@ -36,8 +63,13 @@ class AddExpenseViewModel: ObservableObject {
         else { return "\(expenseObj == nil ? "ADD" : "EDIT") TRANSACTION" }
     }
     
+    func attachImage() { AttachmentHandler.shared.showAttachmentActionSheet() }
+    
+    func removeImage() { imageAttached = nil }
+    
     func saveTransaction(managedObjectContext: NSManagedObjectContext) {
         
+        let expense: ExpenseCD
         let titleStr = title.trimmingCharacters(in: .whitespacesAndNewlines)
         let amountStr = amount.trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -45,22 +77,39 @@ class AddExpenseViewModel: ObservableObject {
             alertMsg = "Enter Title"; showAlert = true
             return
         }
-        
         if amountStr.isEmpty || amountStr == "" {
             alertMsg = "Enter Amount"; showAlert = true
             return
         }
-        
         guard let amount = Double(amountStr) else {
             alertMsg = "Enter valid number"; showAlert = true
             return
         }
         
-        let expense: ExpenseCD
-        if expenseObj != nil { expense = expenseObj! }
-        else {
+        if expenseObj != nil {
+            
+            expense = expenseObj!
+            
+            if let image = imageAttached {
+                if imageUpdated {
+                    if let _ = expense.imageAttached {
+                        // Delete Previous Image from CoreData
+                    }
+                    expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+                }
+            } else {
+                if let _ = expense.imageAttached {
+                    // Delete Previous Image from CoreData
+                }
+                expense.imageAttached = nil
+            }
+            
+        } else {
             expense = ExpenseCD(context: managedObjectContext)
             expense.createdAt = Date()
+            if let image = imageAttached {
+                expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+            }
         }
         expense.updatedAt = Date()
         expense.type = selectedType

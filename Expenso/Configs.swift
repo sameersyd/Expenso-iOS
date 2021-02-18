@@ -10,7 +10,7 @@ import Foundation
 // App Globals
 let APP_NAME = "Expenso"
 let APP_LINK = "https://github.com/sameersyd/Expenso"
-let SHARED_FROM_WELBY = """
+let SHARED_FROM_EXPENSO = """
     Shared from \(APP_NAME) App: \(APP_LINK)
     """
 
@@ -21,6 +21,7 @@ let IMAGE_FILTER_ICON = "filter_icon"
 let IMAGE_OPTION_ICON = "settings_icon"
 
 // User Defaults
+let UD_USE_BIOMETRIC = "useBiometric"
 let UD_EXPENSE_CURRENCY = "expenseCurrency"
 
 let CURRENCY_LIST = ["₹", "$", "€", "¥", "£", "¢", "₭"]

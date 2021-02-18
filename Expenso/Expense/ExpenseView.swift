@@ -27,8 +27,8 @@ struct ExpenseView: View {
                 Color.primary_color.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {  })
-                    NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {  })
+                    NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {})
+                    NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {})
                     ToolbarModelView(title: "Dashboard", hasBackButt: false, button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.showOptionsSheet = true }
                         button2Method: { self.showFilterSheet = true }
@@ -55,7 +55,7 @@ struct ExpenseView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(destination: NavigationLazyView(AddExpenseView()),
+                        NavigationLink(destination: NavigationLazyView(AddExpenseView(viewModel: AddExpenseViewModel())),
                                        label: { Image("plus_icon").resizable().frame(width: 32.0, height: 32.0) })
                         .padding().background(Color.main_color).cornerRadius(35)
                     }
@@ -105,28 +105,32 @@ struct ExpenseMainView: View {
         
         ScrollView(showsIndicators: false) {
             
-            VStack(spacing: 16) {
-                TextView(text: "TOTAL BALANCE", type: .overline).foregroundColor(Color.init(hex: "828282")).padding(.top, 30)
-                TextView(text: "\(CURRENCY)\(getTotalBalance())", type: .h5).foregroundColor(Color.text_primary_color).padding(.bottom, 30)
-            }.frame(maxWidth: .infinity).background(Color.secondary_color).cornerRadius(4)
-            
-            HStack(spacing: 8) {
-                NavigationLink(destination: NavigationLazyView(ExpenseFilterView(isIncome: true)),
-                               label: { ExpenseModelView(isIncome: true, filter: filter) })
-                NavigationLink(destination: NavigationLazyView(ExpenseFilterView(isIncome: false)),
-                               label: { ExpenseModelView(isIncome: false, filter: filter) })
-            }.frame(maxWidth: .infinity)
-            
-            Spacer().frame(height: 16)
-            
-            HStack {
-                TextView(text: "Recent Transaction", type: .subtitle_1).foregroundColor(Color.text_primary_color)
-                Spacer()
-            }.padding(4)
-            
             if fetchRequest.wrappedValue.isEmpty {
                 LottieView(animType: .empty_face).frame(width: 300, height: 300)
+                VStack {
+                    TextView(text: "No Transaction Yet!", type: .h6).foregroundColor(Color.text_primary_color)
+                    TextView(text: "Add a transaction and it will show up here", type: .body_1).foregroundColor(Color.text_secondary_color).padding(.top, 2)
+                }.padding(.horizontal)
             } else {
+                VStack(spacing: 16) {
+                    TextView(text: "TOTAL BALANCE", type: .overline).foregroundColor(Color.init(hex: "828282")).padding(.top, 30)
+                    TextView(text: "\(CURRENCY)\(getTotalBalance())", type: .h5).foregroundColor(Color.text_primary_color).padding(.bottom, 30)
+                }.frame(maxWidth: .infinity).background(Color.secondary_color).cornerRadius(4)
+                
+                HStack(spacing: 8) {
+                    NavigationLink(destination: NavigationLazyView(ExpenseFilterView(isIncome: true)),
+                                   label: { ExpenseModelView(isIncome: true, filter: filter) })
+                    NavigationLink(destination: NavigationLazyView(ExpenseFilterView(isIncome: false)),
+                                   label: { ExpenseModelView(isIncome: false, filter: filter) })
+                }.frame(maxWidth: .infinity)
+                
+                Spacer().frame(height: 16)
+                
+                HStack {
+                    TextView(text: "Recent Transaction", type: .subtitle_1).foregroundColor(Color.text_primary_color)
+                    Spacer()
+                }.padding(4)
+                
                 ForEach(self.fetchRequest.wrappedValue) { expenseObj in
                     NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
                 }

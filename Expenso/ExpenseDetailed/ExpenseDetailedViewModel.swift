@@ -36,7 +36,7 @@ class ExpenseDetailedViewModel: ObservableObject {
         Date: \(getDateFormatter(date: expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))
         Note: \(expenseObj.note ?? "")
         
-        \(SHARED_FROM_WELBY)
+        \(SHARED_FROM_EXPENSO)
         """
         let av = UIActivityViewController(activityItems: [shareStr], applicationActivities: nil)
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
