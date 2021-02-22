@@ -6,5 +6,6 @@ target 'Expenso' do
   use_frameworks!
 
   pod 'lottie-ios'
+  pod 'Charts'
 
 end

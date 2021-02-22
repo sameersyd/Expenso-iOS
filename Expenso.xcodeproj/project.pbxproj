@@ -45,6 +45,7 @@
 		738B1C9025C680D20067407B /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C8F25C680D20067407B /* AboutView.swift */; };
 		73998C5525DA5578007D735B /* AttachmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73998C5425DA5578007D735B /* AttachmentHandler.swift */; };
 		739DFF7B25DC1E3C005BD5C8 /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */; };
+		73BD61BD25DEBC3F00E85F67 /* ExpenseFilterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */; };
 		FF29C9FFAF86E0452686C5D0 /* Pods_Expenso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		738B1C8F25C680D20067407B /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		73998C5425DA5578007D735B /* AttachmentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentHandler.swift; sourceTree = "<group>"; };
 		739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateView.swift; sourceTree = "<group>"; };
+		73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFilterChartView.swift; sourceTree = "<group>"; };
 		B07E4D1AF457AB52E048A8B5 /* Pods-Expenso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.release.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				738B1C8A25C67D880067407B /* ExpenseFilterView.swift */,
+				73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */,
 			);
 			path = ExpenseFilter;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73BD61BD25DEBC3F00E85F67 /* ExpenseFilterChartView.swift in Sources */,
 				738B1C3825C661750067407B /* ExpenseView.swift in Sources */,
 				73998C5525DA5578007D735B /* AttachmentHandler.swift in Sources */,
 				738B1C8425C6764B0067407B /* ExpenseDetailedViewModel.swift in Sources */,

@@ -50,7 +50,7 @@ struct ExpenseFilterView: View {
                     
                     ScrollView(showsIndicators: false) {
                         if let isIncome = isIncome {
-                            ExpenseFilterTotalView(isIncome: isIncome, filter: filter)
+                            ExpenseFilterChartView(isIncome: isIncome, filter: filter).frame(width: 250, height: 250)
                             ExpenseFilterTransList(isIncome: isIncome, filter: filter)
                         }
                         if let tag = categTag {
@@ -75,7 +75,7 @@ struct ExpenseFilterView: View {
     }
 }
 
-struct ExpenseFilterTotalView: View {
+struct ExpenseFilterChartView: View {
     
     var isIncome: Bool
     var type: String
@@ -87,6 +87,23 @@ struct ExpenseFilterTotalView: View {
         var value = Double(0)
         for i in expense { value += i.amount }
         return "\(String(format: "%.2f", value))"
+    }
+    
+    private func getChartModel() -> [ChartModel] {
+        
+        var transactions = [String: Double]()
+        for i in expense {
+            guard let tag = i.tag else { continue }
+            if let value = transactions[tag] {
+                transactions[tag] = value + i.amount
+            } else { transactions[tag] = i.amount }
+        }
+        
+        var models = [ChartModel]()
+        for i in transactions {
+            models.append(ChartModel(transType: getTransTagTitle(transTag: i.key), transAmount: i.value))
+        }
+        return models
     }
     
     init(isIncome: Bool, filter: ExpenseCDFilterTime) {
@@ -108,10 +125,12 @@ struct ExpenseFilterTotalView: View {
     }
     
     var body: some View {
-        VStack(spacing: 16) {
-            TextView(text: "TOTAL \(isIncome ? "INCOME" : "EXPENSE")", type: .overline).foregroundColor(Color.init(hex: "828282")).padding(.top, 30)
-            TextView(text: "\(CURRENCY)\(getTotalValue())", type: .h5).foregroundColor(Color.text_primary_color).padding(.bottom, 30)
-        }.frame(maxWidth: .infinity).background(Color.secondary_color).cornerRadius(4)
+        Group {
+            if !expense.isEmpty {
+                ChartView(label: "Total \(isIncome ? "Income" : "Expense") - \(CURRENCY)\(getTotalValue())",
+                          entries: ChartModel.getTransaction(transactions: getChartModel()))
+            }
+        }
     }
 }
 
