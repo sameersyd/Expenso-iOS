@@ -13,13 +13,19 @@ struct ChartView: UIViewRepresentable {
     var label: String
     var entries: [PieChartDataEntry]
     
-    func makeUIView(context: Context) -> PieChartView { return PieChartView() }
+    func makeUIView(context: Context) -> PieChartView {
+        let pieChartView = PieChartView()
+        pieChartView.holeColor = UIColor.primary_color
+        return pieChartView
+    }
     
     func updateUIView(_ uiView: PieChartView, context: Context) {
         let dataSet = PieChartDataSet(entries: entries, label: label)
-        dataSet.colors = [UIColor(hex: "#6F2F38")] + [UIColor(hex: "#7A8081")] + [UIColor(hex: "#6C7E98")] + [UIColor(hex: "#C7C1B1")] +
-                            [UIColor(hex: "#BC844C")] + [UIColor(hex: "#265B75")] + [UIColor(hex: "#B0120F")] +
-                            [UIColor(hex: "#3C4244")] + [UIColor(hex: "#6E5431")] + [UIColor(hex: "#716942")]
+        dataSet.valueFont = UIFont.init(name: "Inter-Bold", size: 18) ?? .systemFont(ofSize: 18, weight: .bold)
+        dataSet.entryLabelFont = UIFont.init(name: "Inter-Light", size: 14)
+        dataSet.colors = [UIColor(hex: "#DD222D")] + [UIColor(hex: "#F9AA07")] + [UIColor(hex: "#7220DC")] + [UIColor(hex: "#1DB0F3")] +
+                            [UIColor(hex: "#D21667")] + [UIColor(hex: "#EC5B2A")] + [UIColor(hex: "#FADFB4")] +
+                            [UIColor(hex: "#CCCF2E")] + [UIColor(hex: "#E1C10C")] + [UIColor(hex: "#716942")]
         uiView.data = PieChartData(dataSet: dataSet)
     }
 }
