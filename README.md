@@ -1,7 +1,7 @@
 ![GitHub Cards Preview](https://github.com/sameersyd/Expenso/blob/main/art/EXPENSO_COVER.png?raw=true)
 
 # Expenso
-A Simple Expense Tracker App 📱 built to demonstrate the use of SwiftUI, CoreData, Biometrics, Charts and MVVM Architecture 🏗. *Made with love ❤️ by [Sameer Nawaz](https://github.com/sameersyd)*
+A Simple Expense Tracker App 📱 built to demonstrate the use of SwiftUI, CoreData, Charts, Biometrics (Face & Touch ID) and MVVM Architecture 🏗. *Made with love ❤️ by [Sameer Nawaz](https://github.com/sameersyd)*
 
 <br />
 
@@ -16,14 +16,14 @@ The UI/UX for this Expenso App was designed by <a href="https://github.com/Spike
 <br />
 
 ## Light Mode 🌞
-Dashboard | Face ID | All Income | All Expense | Add Transaction 
+Dashboard | Face & Touch ID | All Income | All Expense | Add Transaction 
 --- | --- | --- |--- |--- 
 ![](https://github.com/sameersyd/Expenso/blob/main/art/dashboard.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/auth_faceid.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/income_stat.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/expense_stat.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/add_transaction_attach.png) 
 
 <br />
 
 ## Dark Mode 🌚
-Dashboard | Face ID | All Income | All Expense | Add Transaction 
+Dashboard | Face & Touch ID | All Income | All Expense | Add Transaction 
 --- | --- | --- |--- |--- 
 ![](https://github.com/sameersyd/Expenso/blob/main/art/dashboard_dark.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/auth_faceid_dk.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/income_stat_dk.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/expense_stat_dk.png) | ![](https://github.com/sameersyd/Expenso-iOS/blob/main/art/add_transaction_attach_dark.png) 
 
