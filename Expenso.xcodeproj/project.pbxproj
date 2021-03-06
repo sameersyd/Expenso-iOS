@@ -46,6 +46,8 @@
 		73998C5525DA5578007D735B /* AttachmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73998C5425DA5578007D735B /* AttachmentHandler.swift */; };
 		739DFF7B25DC1E3C005BD5C8 /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */; };
 		73BD61BD25DEBC3F00E85F67 /* ExpenseFilterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */; };
+		753CBDD325F36864005762B8 /* BiometricAuthUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */; };
+		75C6B48025F37FD20079BCFC /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */; };
 		FF29C9FFAF86E0452686C5D0 /* Pods_Expenso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,8 @@
 		73998C5425DA5578007D735B /* AttachmentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentHandler.swift; sourceTree = "<group>"; };
 		739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateView.swift; sourceTree = "<group>"; };
 		73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFilterChartView.swift; sourceTree = "<group>"; };
+		753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthUtility.swift; sourceTree = "<group>"; };
+		75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		B07E4D1AF457AB52E048A8B5 /* Pods-Expenso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.release.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +141,7 @@
 		738B1C1625C65DFE0067407B /* Expenso */ = {
 			isa = PBXGroup;
 			children = (
+				75C6B48225F37FF60079BCFC /* Utilities */,
 				739DFF7925DC1E23005BD5C8 /* Authenticate */,
 				736C720825CFD82900720DEA /* Animations */,
 				738B1C8E25C680C50067407B /* About */,
@@ -265,8 +270,17 @@
 			isa = PBXGroup;
 			children = (
 				739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */,
+				75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */,
 			);
 			path = Authenticate;
+			sourceTree = "<group>";
+		};
+		75C6B48225F37FF60079BCFC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		797DEE244C92A7FEC658698F /* Frameworks */ = {
@@ -424,7 +438,9 @@
 				738B1C4325C6629D0067407B /* ColorExtension.swift in Sources */,
 				738B1C4025C662890067407B /* InterFontModifier.swift in Sources */,
 				738B1C3C25C662580067407B /* Models.swift in Sources */,
+				753CBDD325F36864005762B8 /* BiometricAuthUtility.swift in Sources */,
 				738B1C7325C674320067407B /* ExpenseSettingsView.swift in Sources */,
+				75C6B48025F37FD20079BCFC /* AuthenticationViewModel.swift in Sources */,
 				738B1C4C25C663060067407B /* DismissKeyboard.swift in Sources */,
 				738B1C4625C662D90067407B /* TextView.swift in Sources */,
 				738B1C7B25C6752E0067407B /* AddExpenseViewModel.swift in Sources */,

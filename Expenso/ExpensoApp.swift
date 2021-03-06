@@ -25,7 +25,7 @@ struct ExpensoApp: App {
     var body: some Scene {
         WindowGroup {
             if UserDefaults.standard.bool(forKey: UD_USE_BIOMETRIC) {
-                AuthenticateView()
+                AuthenticateView(viewModel: AuthenticationViewModel())
                     .environment(\.managedObjectContext, persistentContainer.viewContext)
             } else {
                 ExpenseView()
