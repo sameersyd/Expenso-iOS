@@ -40,7 +40,9 @@ struct AuthenticateView: View {
                         .accentColor(Color.text_primary_color)
                     }.padding(.horizontal)
                     Spacer()
-                }.edgesIgnoringSafeArea(.all)
+                }
+                .edgesIgnoringSafeArea(.all)
+                .onAppear(perform: { self.authenticate() })
             }
             .navigationBarHidden(true)
         }
