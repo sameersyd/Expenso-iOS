@@ -1,8 +1,8 @@
 //
-//  ExpenseFilterChartView.swift
+//  ChartView.swift
 //  Expenso
 //
-//  Created by Sameer Nawaz on 18/02/21.
+//  Created by Sameer Nawaz on 15/03/21.
 //
 
 import SwiftUI
@@ -10,8 +10,7 @@ import Charts
 
 struct ChartView: UIViewRepresentable {
     
-    var label: String
-    var entries: [PieChartDataEntry]
+    var label: String, entries: [PieChartDataEntry]
     
     func makeUIView(context: Context) -> PieChartView {
         let pieChartView = PieChartView()
@@ -31,10 +30,7 @@ struct ChartView: UIViewRepresentable {
 }
 
 struct ChartModel {
-    
-    var transType: String
-    var transAmount: Double
-    
+    var transType: String, transAmount: Double
     static func getTransaction(transactions: [ChartModel]) -> [PieChartDataEntry] {
         return transactions.map { PieChartDataEntry(value: $0.transAmount, label: $0.transType) }
     }
