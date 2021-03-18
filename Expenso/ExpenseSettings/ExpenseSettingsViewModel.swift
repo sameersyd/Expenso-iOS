@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import CoreData
 import LocalAuthentication
 
@@ -13,10 +14,12 @@ class ExpenseSettingsViewModel: ObservableObject {
     
     var csvModelArr = [ExpenseCSVModel]()
     
+    var cancellableBiometricTask: AnyCancellable? = nil
+    
     @Published var currency = UserDefaults.standard.string(forKey: UD_EXPENSE_CURRENCY) ?? ""
     @Published var enableBiometric = UserDefaults.standard.bool(forKey: UD_USE_BIOMETRIC) {
         didSet {
-            if enableBiometric { authBiometric() }
+            if enableBiometric { authenticate() }
             else { UserDefaults.standard.setValue(false, forKey: UD_USE_BIOMETRIC) }
         }
     }
@@ -25,31 +28,23 @@ class ExpenseSettingsViewModel: ObservableObject {
     @Published var showAlert = false
     
     init() {}
-    
-    func authBiometric() {
-        let scanner = LAContext()
-        var error: NSError?
-        if scanner.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            scanner.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "To Unlock \(APP_NAME)") { (status, err) in
-                if let err = err {
-                    DispatchQueue.main.async {
-                        self.enableBiometric = false
-                        self.alertMsg = err.localizedDescription
-                        self.showAlert = true
-                    }
-                } else { UserDefaults.standard.setValue(true, forKey: UD_USE_BIOMETRIC) }
+        
+    func authenticate() {
+        showAlert = false
+        alertMsg = ""
+        cancellableBiometricTask = BiometricAuthUtlity.shared.authenticate()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    self.showAlert = true
+                    self.alertMsg = error.description
+                    self.enableBiometric = false
+                default: return
+                }
+            }) { _ in
+                UserDefaults.standard.setValue(true, forKey: UD_USE_BIOMETRIC)
             }
-        } else if scanner.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            scanner.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "To Unlock \(APP_NAME)") { (status, err) in
-                if let err = err {
-                    DispatchQueue.main.async {
-                        self.enableBiometric = false
-                        self.alertMsg = err.localizedDescription
-                        self.showAlert = true
-                    }
-                } else { UserDefaults.standard.setValue(true, forKey: UD_USE_BIOMETRIC) }
-            }
-        }
     }
     
     func getBiometricType() -> String {
@@ -112,5 +107,9 @@ class ExpenseSettingsViewModel: ObservableObject {
         } catch { alertMsg = "\(error)"; showAlert = true }
         
         print(path ?? "not found")
+    }
+    
+    deinit {
+        cancellableBiometricTask = nil
     }
 }
