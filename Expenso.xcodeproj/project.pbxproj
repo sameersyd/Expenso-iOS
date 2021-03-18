@@ -48,6 +48,7 @@
 		73BD61BD25DEBC3F00E85F67 /* ExpenseFilterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */; };
 		753CBDD325F36864005762B8 /* BiometricAuthUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */; };
 		75C6B48025F37FD20079BCFC /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */; };
+		73E688DA25FF32790000462A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E688D925FF32790000462A /* ChartView.swift */; };
 		FF29C9FFAF86E0452686C5D0 /* Pods_Expenso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFilterChartView.swift; sourceTree = "<group>"; };
 		753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthUtility.swift; sourceTree = "<group>"; };
 		75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		73E688D925FF32790000462A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B07E4D1AF457AB52E048A8B5 /* Pods-Expenso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.release.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +202,7 @@
 				738B1C5125C6632F0067407B /* HelperMethods.swift */,
 				736C721A25CFE8E200720DEA /* LottieView.swift */,
 				73998C5425DA5578007D735B /* AttachmentHandler.swift */,
+				73E688D925FF32790000462A /* ChartView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -253,7 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				738B1C8A25C67D880067407B /* ExpenseFilterView.swift */,
-				73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */,
 			);
 			path = ExpenseFilter;
 			sourceTree = "<group>";
@@ -424,7 +426,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73BD61BD25DEBC3F00E85F67 /* ExpenseFilterChartView.swift in Sources */,
 				738B1C3825C661750067407B /* ExpenseView.swift in Sources */,
 				73998C5525DA5578007D735B /* AttachmentHandler.swift in Sources */,
 				738B1C8425C6764B0067407B /* ExpenseDetailedViewModel.swift in Sources */,
@@ -449,6 +450,7 @@
 				738B1C4925C662F20067407B /* DropdownButton.swift in Sources */,
 				738B1C7025C674120067407B /* ExpenseSettingsViewModel.swift in Sources */,
 				738B1C2F25C65EF70067407B /* Configs.swift in Sources */,
+				73E688DA25FF32790000462A /* ChartView.swift in Sources */,
 				736C721B25CFE8E200720DEA /* LottieView.swift in Sources */,
 				738B1C7725C675200067407B /* AddExpenseView.swift in Sources */,
 				738B1C8025C6763E0067407B /* ExpenseDetailedView.swift in Sources */,
