@@ -39,7 +39,7 @@ struct AuthenticateView: View {
                     Spacer()
                 }
                 .edgesIgnoringSafeArea(.all)
-                .onAppear(perform: { self.authenticate() })
+                .onAppear(perform: viewModel.authenticate)
             }
             .navigationBarHidden(true)
         }

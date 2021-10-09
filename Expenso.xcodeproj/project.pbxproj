@@ -45,10 +45,9 @@
 		738B1C9025C680D20067407B /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C8F25C680D20067407B /* AboutView.swift */; };
 		73998C5525DA5578007D735B /* AttachmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73998C5425DA5578007D735B /* AttachmentHandler.swift */; };
 		739DFF7B25DC1E3C005BD5C8 /* AuthenticateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */; };
-		73BD61BD25DEBC3F00E85F67 /* ExpenseFilterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */; };
+		73E688DA25FF32790000462A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E688D925FF32790000462A /* ChartView.swift */; };
 		753CBDD325F36864005762B8 /* BiometricAuthUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */; };
 		75C6B48025F37FD20079BCFC /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */; };
-		73E688DA25FF32790000462A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E688D925FF32790000462A /* ChartView.swift */; };
 		FF29C9FFAF86E0452686C5D0 /* Pods_Expenso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,10 +94,9 @@
 		738B1C8F25C680D20067407B /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		73998C5425DA5578007D735B /* AttachmentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentHandler.swift; sourceTree = "<group>"; };
 		739DFF7A25DC1E3C005BD5C8 /* AuthenticateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateView.swift; sourceTree = "<group>"; };
-		73BD61BC25DEBC3F00E85F67 /* ExpenseFilterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFilterChartView.swift; sourceTree = "<group>"; };
+		73E688D925FF32790000462A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		753CBDD225F36864005762B8 /* BiometricAuthUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthUtility.swift; sourceTree = "<group>"; };
 		75C6B47F25F37FD20079BCFC /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
-		73E688D925FF32790000462A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B07E4D1AF457AB52E048A8B5 /* Pods-Expenso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.release.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +112,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		733763A827120DB600AA983A /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				739DFF7925DC1E23005BD5C8 /* Authenticate */,
+				738B1C8E25C680C50067407B /* About */,
+				738B1C8925C67D790067407B /* ExpenseFilter */,
+				738B1C7D25C675FA0067407B /* ExpenseDetailed */,
+				738B1C7525C6750F0067407B /* AddExpense */,
+				738B1C6A25C673EB0067407B /* ExpenseSettings */,
+				738B1C3625C661580067407B /* Expense */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		733763A927120DF300AA983A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				736C720825CFD82900720DEA /* Animations */,
+				738B1C5425C671680067407B /* Inter */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		733763AA27120E0500AA983A /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				75C6B48225F37FF60079BCFC /* Utilities */,
+				738B1C3A25C662060067407B /* Helpers */,
+				738B1C3125C660070067407B /* CoreData */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		736C720825CFD82900720DEA /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,18 +174,9 @@
 		738B1C1625C65DFE0067407B /* Expenso */ = {
 			isa = PBXGroup;
 			children = (
-				75C6B48225F37FF60079BCFC /* Utilities */,
-				739DFF7925DC1E23005BD5C8 /* Authenticate */,
-				736C720825CFD82900720DEA /* Animations */,
-				738B1C8E25C680C50067407B /* About */,
-				738B1C8925C67D790067407B /* ExpenseFilter */,
-				738B1C7D25C675FA0067407B /* ExpenseDetailed */,
-				738B1C7525C6750F0067407B /* AddExpense */,
-				738B1C6A25C673EB0067407B /* ExpenseSettings */,
-				738B1C5425C671680067407B /* Inter */,
-				738B1C3A25C662060067407B /* Helpers */,
-				738B1C3625C661580067407B /* Expense */,
-				738B1C3125C660070067407B /* CoreData */,
+				733763AA27120E0500AA983A /* Library */,
+				733763A927120DF300AA983A /* Resources */,
+				733763A827120DB600AA983A /* Screens */,
 				738B1C1725C65DFE0067407B /* ExpensoApp.swift */,
 				738B1C1B25C65E060067407B /* Assets.xcassets */,
 				738B1C2525C65E060067407B /* Info.plist */,
@@ -584,7 +606,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Expenso/Preview Content\"";
-				DEVELOPMENT_TEAM = GY8LXNR38D;
+				DEVELOPMENT_TEAM = 7S7EBZGDA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Expenso/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -593,7 +615,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.femargent.Expenso;
+				PRODUCT_BUNDLE_IDENTIFIER = com.expenso.Expenso;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -608,7 +630,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Expenso/Preview Content\"";
-				DEVELOPMENT_TEAM = GY8LXNR38D;
+				DEVELOPMENT_TEAM = 7S7EBZGDA6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Expenso/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -617,7 +639,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.femargent.Expenso;
+				PRODUCT_BUNDLE_IDENTIFIER = com.expenso.Expenso;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
