@@ -89,6 +89,10 @@ class AddExpenseViewModel: ObservableObject {
             alertMsg = "Amount can't be negative"; showAlert = true
             return
         }
+        guard amount <= 1000000000 else {
+            alertMsg = "Enter a smaller amount"; showAlert = true
+            return
+        }
         
         if expenseObj != nil {
             
