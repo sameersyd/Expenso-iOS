@@ -85,6 +85,14 @@ class AddExpenseViewModel: ObservableObject {
             alertMsg = "Enter valid number"; showAlert = true
             return
         }
+        guard amount >= 0 else {
+            alertMsg = "Amount can't be negative"; showAlert = true
+            return
+        }
+        guard amount <= 1000000000 else {
+            alertMsg = "Enter a smaller amount"; showAlert = true
+            return
+        }
         
         if expenseObj != nil {
             
