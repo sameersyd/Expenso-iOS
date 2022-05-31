@@ -158,6 +158,14 @@ struct AddExpenseView: View {
                 VStack {
                     Spacer()
                     VStack {
+                        Button(action: { viewModel.saveMonthlyTransaction(managedObjectContext: managedObjectContext) }, label: {
+                            HStack {
+                                Spacer()
+                                TextView(text: "\(viewModel.getButtText()) every Month", type: .button).foregroundColor(.white)
+                                Spacer()
+                            }
+                        })
+                        .padding(.vertical, 12).background(Color.main_color).cornerRadius(8)
                         Button(action: { viewModel.saveTransaction(managedObjectContext: managedObjectContext) }, label: {
                             HStack {
                                 Spacer()

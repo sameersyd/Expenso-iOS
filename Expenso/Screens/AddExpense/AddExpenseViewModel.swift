@@ -11,6 +11,7 @@ import CoreData
 class AddExpenseViewModel: ObservableObject {
     
     var expenseObj: ExpenseCD?
+    var monthlyExpenseObj: MonthlyExpenseCD?
     
     @Published var title = ""
     @Published var amount = ""
@@ -139,4 +140,68 @@ class AddExpenseViewModel: ObservableObject {
             try managedObjectContext.save(); closePresenter = true
         } catch { alertMsg = "\(error)"; showAlert = true }
     }
+    
+    
+    func saveMonthlyTransaction(managedObjectContext: NSManagedObjectContext) {
+        let expense: MonthlyExpenseCD
+        let titleStr = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let amountStr = amount.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if titleStr.isEmpty || titleStr == "" {
+            alertMsg = "Enter Title"; showAlert = true
+            return
+        }
+        if amountStr.isEmpty || amountStr == "" {
+            alertMsg = "Enter Amount"; showAlert = true
+            return
+        }
+        guard let amount = Double(amountStr) else {
+            alertMsg = "Enter valid number"; showAlert = true
+            return
+        }
+        guard amount >= 0 else {
+            alertMsg = "Amount can't be negative"; showAlert = true
+            return
+        }
+        guard amount <= 1000000000 else {
+            alertMsg = "Enter a smaller amount"; showAlert = true
+            return
+        }
+        
+        if monthlyExpenseObj != nil {
+            
+            expense = monthlyExpenseObj!
+            
+            if let image = imageAttached {
+                if imageUpdated {
+                    if let _ = expense.imageAttached {
+                        // Delete Previous Image from CoreData
+                    }
+                    expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+                }
+            } else {
+                if let _ = expense.imageAttached {
+                    // Delete Previous Image from CoreData
+                }
+                expense.imageAttached = nil
+            }
+            
+        } else {
+            expense = MonthlyExpenseCD(context: managedObjectContext)
+            expense.usingDate = Date()
+            if let image = imageAttached {
+                expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+            }
+        }
+        expense.type = selectedType
+        expense.title = titleStr
+        expense.tag = selectedTag
+        expense.note = note
+        expense.amount = amount
+        do {
+            try managedObjectContext.save()
+            closePresenter = true
+        } catch { alertMsg = "\(error)"; showAlert = true }
+    }
+    
 }
