@@ -172,26 +172,26 @@ class AddExpenseViewModel: ObservableObject {
             
             expense = monthlyExpenseObj!
             
-            if let image = imageAttached {
-                if imageUpdated {
-                    if let _ = expense.imageAttached {
-                        // Delete Previous Image from CoreData
-                    }
-                    expense.imageAttached = image.jpegData(compressionQuality: 1.0)
-                }
-            } else {
-                if let _ = expense.imageAttached {
-                    // Delete Previous Image from CoreData
-                }
-                expense.imageAttached = nil
-            }
+//            if let image = imageAttached {
+//                if imageUpdated {
+//                    if let _ = expense.imageAttached {
+//                        // Delete Previous Image from CoreData
+//                    }
+//                    expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+//                }
+//            } else {
+//                if let _ = expense.imageAttached {
+//                    // Delete Previous Image from CoreData
+//                }
+//                expense.imageAttached = nil
+//            }
             
         } else {
             expense = MonthlyExpenseCD(context: managedObjectContext)
-            expense.usingDate = Date()
-            if let image = imageAttached {
-                expense.imageAttached = image.jpegData(compressionQuality: 1.0)
-            }
+            expense.usingDate = occuredOn
+//            if let image = imageAttached {
+//                expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+//            }
         }
         expense.type = selectedType
         expense.title = titleStr
@@ -202,6 +202,43 @@ class AddExpenseViewModel: ObservableObject {
             try managedObjectContext.save()
             closePresenter = true
         } catch { alertMsg = "\(error)"; showAlert = true }
+    }
+    
+    func checkAllMonthlyExpenses(managedObjectContext: NSManagedObjectContext, request: NSFetchRequest<MonthlyExpenseCD>) {
+        do {
+            let allMonthlyExpenses = try? managedObjectContext.fetch(request)
+            if allMonthlyExpenses == nil {
+                print("error")
+                return
+            }
+            for expense in allMonthlyExpenses! {
+                print(expense.usingDate ?? Date())
+                if expense.usingDate == nil {
+                    continue
+                }
+                if Calendar.current.isDateInToday(expense.usingDate!) {
+                    if let date = Calendar.current.date(byAdding: .month, value: 1, to: expense.usingDate!) {
+                        expense.usingDate = date
+                        print(expense.usingDate!)
+                        let newExpense = ExpenseCD(context: managedObjectContext)
+                        newExpense.amount = expense.amount
+                        newExpense.createdAt = Date()
+                        //newExpense.imageAttached = expense.imageAttached
+                        newExpense.note = expense.note
+                        newExpense.occuredOn = Date()
+                        newExpense.tag = expense.tag
+                        newExpense.title = expense.title
+                        newExpense.type = expense.type
+                        newExpense.updatedAt = Date()
+                        try managedObjectContext.save()
+                    }
+                } else {
+                    print("not current date")
+                }
+            }
+        } catch {
+            print(error)
+        }
     }
     
 }

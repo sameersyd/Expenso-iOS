@@ -21,6 +21,7 @@ struct ExpenseView: View {
     @State private var displayAbout = false
     @State private var displaySettings = false
     
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -59,7 +60,7 @@ struct ExpenseView: View {
                                        label: { Image("plus_icon").resizable().frame(width: 32.0, height: 32.0) })
                         .padding().background(Color.main_color).cornerRadius(35)
                         Button(action: {
-                            MonthlyExpenseCD.getallDates(context: managedObjectContext)
+                            AddExpenseViewModel().checkAllMonthlyExpenses(managedObjectContext: managedObjectContext, request: MonthlyExpenseCD.getallDates(context: managedObjectContext))
                         }, label: {
                             Text("Test data")
                         })
