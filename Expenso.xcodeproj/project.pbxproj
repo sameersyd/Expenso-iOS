@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24AE70432847F81100B2BD49 /* MonthlyExpenseSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE70422847F81100B2BD49 /* MonthlyExpenseSettingsView.swift */; };
 		24DF38B62846B7BC006CA05F /* MonthlyExpenseCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF38B52846B7BC006CA05F /* MonthlyExpenseCD.swift */; };
 		736C720A25CFD89900720DEA /* empty-face.json in Resources */ = {isa = PBXBuildFile; fileRef = 736C720925CFD89900720DEA /* empty-face.json */; };
 		736C721B25CFE8E200720DEA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736C721A25CFE8E200720DEA /* LottieView.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Expenso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24AE70422847F81100B2BD49 /* MonthlyExpenseSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExpenseSettingsView.swift; sourceTree = "<group>"; };
 		24DF38B52846B7BC006CA05F /* MonthlyExpenseCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExpenseCD.swift; sourceTree = "<group>"; };
 		2C2D1600DAC62FA04EDCF170 /* Pods-Expenso.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.debug.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.debug.xcconfig"; sourceTree = "<group>"; };
 		736C720925CFD89900720DEA /* empty-face.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "empty-face.json"; sourceTree = "<group>"; };
@@ -114,9 +116,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24AE70412847F7F900B2BD49 /* MonthlyExpensesSettings */ = {
+			isa = PBXGroup;
+			children = (
+				24AE70422847F81100B2BD49 /* MonthlyExpenseSettingsView.swift */,
+			);
+			path = MonthlyExpensesSettings;
+			sourceTree = "<group>";
+		};
 		733763A827120DB600AA983A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				24AE70412847F7F900B2BD49 /* MonthlyExpensesSettings */,
 				739DFF7925DC1E23005BD5C8 /* Authenticate */,
 				738B1C8E25C680C50067407B /* About */,
 				738B1C8925C67D790067407B /* ExpenseFilter */,
@@ -455,6 +466,7 @@
 				73998C5525DA5578007D735B /* AttachmentHandler.swift in Sources */,
 				738B1C8425C6764B0067407B /* ExpenseDetailedViewModel.swift in Sources */,
 				738B1C9025C680D20067407B /* AboutView.swift in Sources */,
+				24AE70432847F81100B2BD49 /* MonthlyExpenseSettingsView.swift in Sources */,
 				738B1C4F25C663180067407B /* DateExtension.swift in Sources */,
 				738B1C5225C6632F0067407B /* HelperMethods.swift in Sources */,
 				738B1C2425C65E060067407B /* Expenso.xcdatamodeld in Sources */,

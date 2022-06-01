@@ -20,6 +20,7 @@ struct ExpenseView: View {
     @State private var showOptionsSheet = false
     @State private var displayAbout = false
     @State private var displaySettings = false
+    @State private var displayMonthlyExpenses = false
     
     
     var body: some View {
@@ -30,6 +31,7 @@ struct ExpenseView: View {
                 VStack {
                     NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {})
                     NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {})
+                    NavigationLink(destination: NavigationLazyView(MonthlyExpenseSettingsView()), isActive: $displayMonthlyExpenses, label: {})
                     ToolbarModelView(title: "Dashboard", hasBackButt: false, button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.showOptionsSheet = true }
                         button2Method: { self.showFilterSheet = true }
@@ -46,6 +48,7 @@ struct ExpenseView: View {
                             ActionSheet(title: Text("Select an option"), buttons: [
                                     .default(Text("About")) { self.displayAbout = true },
                                     .default(Text("Settings")) { self.displaySettings = true },
+                                    .default(Text("Monthly Expenses")) { self.displayMonthlyExpenses = true },
                                     .cancel()
                             ])
                         }
@@ -60,7 +63,7 @@ struct ExpenseView: View {
                                        label: { Image("plus_icon").resizable().frame(width: 32.0, height: 32.0) })
                         .padding().background(Color.main_color).cornerRadius(35)
                         Button(action: {
-                            AddExpenseViewModel().checkAllMonthlyExpenses(managedObjectContext: managedObjectContext, request: MonthlyExpenseCD.getallDates(context: managedObjectContext))
+                            AddExpenseViewModel().checkAllMonthlyExpenses(managedObjectContext: managedObjectContext, request: MonthlyExpenseCD.getAllMonthlyExpenseData())
                         }, label: {
                             Text("Test data")
                         })

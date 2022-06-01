@@ -19,7 +19,7 @@ public class MonthlyExpenseCD: NSManagedObject, Identifiable {
 }
 
 extension MonthlyExpenseCD {
-    static func getallDates(context: NSManagedObjectContext) -> NSFetchRequest<MonthlyExpenseCD> {
+    static func getAllMonthlyExpenseData() -> NSFetchRequest<MonthlyExpenseCD> {
         let request: NSFetchRequest<MonthlyExpenseCD> = MonthlyExpenseCD.fetchRequest() as! NSFetchRequest<MonthlyExpenseCD>
         request.sortDescriptors = []
         return request
