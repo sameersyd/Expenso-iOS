@@ -20,7 +20,7 @@ struct ExpenseView: View {
     @State private var showOptionsSheet = false
     @State private var displayAbout = false
     @State private var displaySettings = false
-    @State private var displayMonthlyExpenses = false
+    @State private var displayMonthlyTransaction = false
     
     
     var body: some View {
@@ -31,7 +31,7 @@ struct ExpenseView: View {
                 VStack {
                     NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {})
                     NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {})
-                    NavigationLink(destination: NavigationLazyView(MonthlyExpenseSettingsView()), isActive: $displayMonthlyExpenses, label: {})
+                    NavigationLink(destination: NavigationLazyView(MonthlyTransactionSettingsView()), isActive: $displayMonthlyTransaction, label: {})
                     ToolbarModelView(title: "Dashboard", hasBackButt: false, button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.showOptionsSheet = true }
                         button2Method: { self.showFilterSheet = true }
@@ -48,7 +48,7 @@ struct ExpenseView: View {
                             ActionSheet(title: Text("Select an option"), buttons: [
                                     .default(Text("About")) { self.displayAbout = true },
                                     .default(Text("Settings")) { self.displaySettings = true },
-                                    .default(Text("Monthly Expenses")) { self.displayMonthlyExpenses = true },
+                                    .default(Text("Monthly Transactions")) { self.displayMonthlyTransaction = true },
                                     .cancel()
                             ])
                         }

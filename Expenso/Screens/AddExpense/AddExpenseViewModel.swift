@@ -11,7 +11,7 @@ import CoreData
 class AddExpenseViewModel: ObservableObject {
     
     var expenseObj: ExpenseCD?
-    var monthlyExpenseObj: MonthlyExpenseCD?
+    var monthlyTransactionObj: MonthlyExpenseCD?
     
     @Published var title = ""
     @Published var amount = ""
@@ -168,9 +168,9 @@ class AddExpenseViewModel: ObservableObject {
             return
         }
         
-        if monthlyExpenseObj != nil {
+        if monthlyTransactionObj != nil {
             
-            expense = monthlyExpenseObj!
+            expense = monthlyTransactionObj!
             
 //            if let image = imageAttached {
 //                if imageUpdated {
@@ -201,6 +201,14 @@ class AddExpenseViewModel: ObservableObject {
         do {
             try managedObjectContext.save()
             closePresenter = true
+        } catch { alertMsg = "\(error)"; showAlert = true }
+    }
+    
+    func deleteMonthlyTransaction(managedObjectContext: NSManagedObjectContext) {
+        guard let monthlyTransactionObj = monthlyTransactionObj else { return }
+        managedObjectContext.delete(monthlyTransactionObj)
+        do {
+            try managedObjectContext.save(); closePresenter = true
         } catch { alertMsg = "\(error)"; showAlert = true }
     }
     
