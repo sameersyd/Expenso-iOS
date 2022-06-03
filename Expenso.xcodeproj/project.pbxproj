@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		243DEC7A2848FCC1001281AD /* MonthlyTransactionDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DEC792848FCC1001281AD /* MonthlyTransactionDetailedView.swift */; };
 		243DEC7C2848FF55001281AD /* MonthlyTransactionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243DEC7B2848FF55001281AD /* MonthlyTransactionDetailedViewModel.swift */; };
+		2463680C284A35CE007FC25F /* EditMonthlyTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2463680B284A35CE007FC25F /* EditMonthlyTransactionView.swift */; };
 		24AE70432847F81100B2BD49 /* MonthlyTransactionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE70422847F81100B2BD49 /* MonthlyTransactionSettingsView.swift */; };
-		24DF38B62846B7BC006CA05F /* MonthlyExpenseCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF38B52846B7BC006CA05F /* MonthlyExpenseCD.swift */; };
+		24DF38B62846B7BC006CA05F /* MonthlyTransactionCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DF38B52846B7BC006CA05F /* MonthlyTransactionCD.swift */; };
 		736C720A25CFD89900720DEA /* empty-face.json in Resources */ = {isa = PBXBuildFile; fileRef = 736C720925CFD89900720DEA /* empty-face.json */; };
 		736C721B25CFE8E200720DEA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736C721A25CFE8E200720DEA /* LottieView.swift */; };
 		738B1C1825C65DFE0067407B /* ExpensoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C1725C65DFE0067407B /* ExpensoApp.swift */; };
@@ -59,8 +60,9 @@
 		1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Expenso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		243DEC792848FCC1001281AD /* MonthlyTransactionDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTransactionDetailedView.swift; sourceTree = "<group>"; };
 		243DEC7B2848FF55001281AD /* MonthlyTransactionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTransactionDetailedViewModel.swift; sourceTree = "<group>"; };
+		2463680B284A35CE007FC25F /* EditMonthlyTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMonthlyTransactionView.swift; sourceTree = "<group>"; };
 		24AE70422847F81100B2BD49 /* MonthlyTransactionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTransactionSettingsView.swift; sourceTree = "<group>"; };
-		24DF38B52846B7BC006CA05F /* MonthlyExpenseCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyExpenseCD.swift; sourceTree = "<group>"; };
+		24DF38B52846B7BC006CA05F /* MonthlyTransactionCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTransactionCD.swift; sourceTree = "<group>"; };
 		2C2D1600DAC62FA04EDCF170 /* Pods-Expenso.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.debug.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.debug.xcconfig"; sourceTree = "<group>"; };
 		736C720925CFD89900720DEA /* empty-face.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "empty-face.json"; sourceTree = "<group>"; };
 		736C721A25CFE8E200720DEA /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				243DEC792848FCC1001281AD /* MonthlyTransactionDetailedView.swift */,
+				2463680B284A35CE007FC25F /* EditMonthlyTransactionView.swift */,
 				243DEC7B2848FF55001281AD /* MonthlyTransactionDetailedViewModel.swift */,
 			);
 			path = MonthlyTransactionDetailed;
@@ -226,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				738B1C3225C660140067407B /* ExpenseCD.swift */,
-				24DF38B52846B7BC006CA05F /* MonthlyExpenseCD.swift */,
+				24DF38B52846B7BC006CA05F /* MonthlyTransactionCD.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -486,7 +489,7 @@
 				738B1C5225C6632F0067407B /* HelperMethods.swift in Sources */,
 				738B1C2425C65E060067407B /* Expenso.xcdatamodeld in Sources */,
 				738B1C8B25C67D880067407B /* ExpenseFilterView.swift in Sources */,
-				24DF38B62846B7BC006CA05F /* MonthlyExpenseCD.swift in Sources */,
+				24DF38B62846B7BC006CA05F /* MonthlyTransactionCD.swift in Sources */,
 				739DFF7B25DC1E3C005BD5C8 /* AuthenticateView.swift in Sources */,
 				738B1C3325C660140067407B /* ExpenseCD.swift in Sources */,
 				738B1C4325C6629D0067407B /* ColorExtension.swift in Sources */,
@@ -508,6 +511,7 @@
 				243DEC7C2848FF55001281AD /* MonthlyTransactionDetailedViewModel.swift in Sources */,
 				738B1C7725C675200067407B /* AddExpenseView.swift in Sources */,
 				738B1C8025C6763E0067407B /* ExpenseDetailedView.swift in Sources */,
+				2463680C284A35CE007FC25F /* EditMonthlyTransactionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="MonthlyExpenseCD" representedClassName=".MonthlyExpenseCD" syncable="YES">
+    <entity name="MonthlyTransactionCD" representedClassName=".MonthlyTransactionCD" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="imageAttached" optional="YES" attributeType="Binary"/>
         <attribute name="note" optional="YES" attributeType="String"/>
@@ -22,6 +22,6 @@
     </entity>
     <elements>
         <element name="ExpenseCD" positionX="-63" positionY="-9" width="128" height="164"/>
-        <element name="MonthlyExpenseCD" positionX="-63" positionY="63" width="128" height="134"/>
+        <element name="MonthlyTransactionCD" positionX="-63" positionY="63" width="128" height="134"/>
     </elements>
 </model>

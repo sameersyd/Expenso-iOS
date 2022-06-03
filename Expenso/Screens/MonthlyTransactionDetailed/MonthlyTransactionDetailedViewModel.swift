@@ -10,17 +10,17 @@ import CoreData
 
 class MonthlyTransactionDetailedViewModel: ObservableObject {
     
-    @Published var monthlyTransactionObj: MonthlyExpenseCD
+    @Published var monthlyTransactionObj: MonthlyTransactionCD
     
     @Published var alertMsg = String()
     @Published var showAlert = false
     @Published var closePresenter = false
     
-    init(monthlyTransactionObj: MonthlyExpenseCD) {
+    init(monthlyTransactionObj: MonthlyTransactionCD) {
         self.monthlyTransactionObj = monthlyTransactionObj
     }
     
-    func deleteNote(managedObjectContext: NSManagedObjectContext) {
+    func deleteMonthlyTransaction(managedObjectContext: NSManagedObjectContext) {
         managedObjectContext.delete(monthlyTransactionObj)
         do {
             try managedObjectContext.save(); closePresenter = true

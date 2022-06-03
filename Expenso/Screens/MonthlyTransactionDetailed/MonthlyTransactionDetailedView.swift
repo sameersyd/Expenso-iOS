@@ -18,7 +18,7 @@ struct MonthlyTransactionDetailedView: View {
     
     @State private var confirmDelete = false
     
-    init(monthlyTransactionObj: MonthlyExpenseCD) {
+    init(monthlyTransactionObj: MonthlyTransactionCD) {
        viewModel = MonthlyTransactionDetailedViewModel(monthlyTransactionObj: monthlyTransactionObj)
     }
     
@@ -64,24 +64,23 @@ struct MonthlyTransactionDetailedView: View {
                                 content: {
                                     Alert(title: Text(APP_NAME), message: Text("Are you sure you want to delete this transaction?"),
                                         primaryButton: .destructive(Text("Delete")) {
-                                            viewModel.deleteNote(managedObjectContext: managedObjectContext)
+                                            viewModel.deleteMonthlyTransaction(managedObjectContext: managedObjectContext)
                                         }, secondaryButton: Alert.Button.cancel(Text("Cancel"), action: { confirmDelete = false })
                                     )
                                 })
                 }.edgesIgnoringSafeArea(.all)
-                //TODO: Edit View for Monthly Expense
-//                VStack {
-//                    Spacer()
-//                    HStack {
-//                        Spacer()
-//                        NavigationLink(destination: EditMonthlyTransactionView(viewModel: AddExpenseViewModel(expenseObj: nil, monthlyTransactionObj: viewModel.monthlyTransactionObj)), label: {
-//                            Image("pencil_icon").resizable().frame(width: 28.0, height: 28.0)
-//                            Text("Edit").modifier(InterFont(.semiBold, size: 18)).foregroundColor(.white)
-//                        })
-//                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 20))
-//                        .background(Color.main_color).cornerRadius(25)
-//                    }.padding(24)
-//                }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: EditMonthlyTransactionView(viewModel: AddExpenseViewModel(expenseObj: nil, monthlyTransactionObj: viewModel.monthlyTransactionObj)), label: {
+                            Image("pencil_icon").resizable().frame(width: 28.0, height: 28.0)
+                            Text("Edit").modifier(InterFont(.semiBold, size: 18)).foregroundColor(.white)
+                        })
+                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 20))
+                        .background(Color.main_color).cornerRadius(25)
+                    }.padding(24)
+                }
             }
             .navigationBarHidden(true)
         }

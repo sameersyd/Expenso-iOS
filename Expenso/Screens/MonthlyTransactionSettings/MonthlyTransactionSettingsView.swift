@@ -10,7 +10,7 @@ import SwiftUI
 struct MonthlyTransactionSettingsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @FetchRequest(fetchRequest: MonthlyExpenseCD.getAllMonthlyExpenseData()) var monthlyTransactions: FetchedResults<MonthlyExpenseCD>
+    @FetchRequest(fetchRequest: MonthlyTransactionCD.getAllMonthlyExpenseData()) var monthlyTransactions: FetchedResults<MonthlyTransactionCD>
     var body: some View {
         NavigationView {
             ZStack {
@@ -40,7 +40,7 @@ struct MonthlyTransactionSettingsView: View {
 
 struct MonthlyTransView: View {
     
-    @ObservedObject var monthlyTransactionObj: MonthlyExpenseCD
+    @ObservedObject var monthlyTransactionObj: MonthlyTransactionCD
     @AppStorage(UD_EXPENSE_CURRENCY) var CURRENCY: String = ""
     
     var body: some View {
@@ -62,7 +62,7 @@ struct MonthlyTransView: View {
                 HStack {
                     TextView(text: getTransTagTitle(transTag: monthlyTransactionObj.tag ?? ""), type: .body_2).foregroundColor(Color.text_primary_color)
                     Spacer()
-                    TextView(text: "made on: ", type: .body_2).foregroundColor(Color.text_primary_color)
+                    TextView(text: "occurs on: ", type: .body_2).foregroundColor(Color.text_primary_color)
                     TextView(text: getDateFormatter(date: monthlyTransactionObj.usingDate, format: "MMM dd, yyyy"), type: .body_2).foregroundColor(Color.text_primary_color)
                 }
             }.padding(.leading, 4)

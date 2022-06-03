@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-public class MonthlyExpenseCD: NSManagedObject, Identifiable {
+public class MonthlyTransactionCD: NSManagedObject, Identifiable {
     @NSManaged public var type: String?
     @NSManaged public var title: String?
     @NSManaged public var tag: String?
@@ -18,9 +18,9 @@ public class MonthlyExpenseCD: NSManagedObject, Identifiable {
     @NSManaged public var usingDate: Date?
 }
 
-extension MonthlyExpenseCD {
-    static func getAllMonthlyExpenseData() -> NSFetchRequest<MonthlyExpenseCD> {
-        let request: NSFetchRequest<MonthlyExpenseCD> = MonthlyExpenseCD.fetchRequest() as! NSFetchRequest<MonthlyExpenseCD>
+extension MonthlyTransactionCD {
+    static func getAllMonthlyExpenseData() -> NSFetchRequest<MonthlyTransactionCD> {
+        let request: NSFetchRequest<MonthlyTransactionCD> = MonthlyTransactionCD.fetchRequest() as! NSFetchRequest<MonthlyTransactionCD>
         request.sortDescriptors = []
         return request
     }

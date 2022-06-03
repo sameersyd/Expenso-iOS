@@ -63,7 +63,7 @@ struct ExpenseView: View {
                                        label: { Image("plus_icon").resizable().frame(width: 32.0, height: 32.0) })
                         .padding().background(Color.main_color).cornerRadius(35)
                         Button(action: {
-                            AddExpenseViewModel().checkAllMonthlyExpenses(managedObjectContext: managedObjectContext, request: MonthlyExpenseCD.getAllMonthlyExpenseData())
+                            AddExpenseViewModel().checkAllMonthlyExpenses(managedObjectContext: managedObjectContext, request: MonthlyTransactionCD.getAllMonthlyExpenseData())
                         }, label: {
                             Text("Test data")
                         })
