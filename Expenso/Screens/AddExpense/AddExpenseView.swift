@@ -114,6 +114,13 @@ struct AddExpenseView: View {
                                 .background(Color.secondary_color)
                                 .cornerRadius(4)
                             
+                            Toggle("monthly", isOn: $viewModel.monthlyFrequency)
+                                .padding(5)
+                                .accentColor(Color.text_primary_color)
+                                .frame(height: 50).padding(.leading, 16)
+                                .background(Color.secondary_color)
+                                .cornerRadius(4)
+                            
                             Button(action: { viewModel.attachImage() }, label: {
                                 HStack {
                                     Image(systemName: "paperclip")
@@ -134,6 +141,7 @@ struct AddExpenseView: View {
                                 ])
                             }
                             
+                            
                             if let image = viewModel.imageAttached {
                                 Button(action: { showAttachSheet = true }, label: {
                                     Image(uiImage: image)
@@ -146,7 +154,7 @@ struct AddExpenseView: View {
                             }
                             
                             Spacer().frame(height: 150)
-                            Spacer()
+                            //Spacer()
                         }
                         .frame(maxWidth: .infinity).padding(.horizontal, 8)
                         .alert(isPresented: $viewModel.showAlert,

@@ -20,6 +20,12 @@ enum ExpenseCDFilterTime: String {
     case month
 }
 
+@objc
+public enum Frequency: Int16 {
+    case onetime
+    case monthly
+}
+
 public class ExpenseCD: NSManagedObject, Identifiable {
     @NSManaged public var createdAt: Date?
     @NSManaged public var updatedAt: Date?
@@ -30,6 +36,8 @@ public class ExpenseCD: NSManagedObject, Identifiable {
     @NSManaged public var note: String?
     @NSManaged public var amount: Double
     @NSManaged public var imageAttached: Data?
+    
+    @NSManaged public var frequencyValue: Frequency
 }
 
 extension ExpenseCD {
@@ -47,6 +55,16 @@ extension ExpenseCD {
             let predicate = NSPredicate(format: "occuredOn >= %@ AND occuredOn <= %@", startDate, endDate)
             request.predicate = predicate
         }
+        request.sortDescriptors = [sortDescriptor]
+        return request
+    }
+    
+    static func sortExpenseDataByFrequency(sortBy: ExpenseCDSort = .occuredOn, frequency: Frequency, ascending: Bool = true) -> NSFetchRequest<ExpenseCD> {
+        let request: NSFetchRequest<ExpenseCD> = ExpenseCD.fetchRequest() as! NSFetchRequest<ExpenseCD>
+        let sortDescriptor = NSSortDescriptor(key: sortBy.rawValue, ascending: ascending)
+        print(frequency.rawValue)
+        let predicate = NSPredicate(format: "frequencyValue == %i", frequency.rawValue)
+        request.predicate = predicate
         request.sortDescriptors = [sortDescriptor]
         return request
     }

@@ -12,7 +12,7 @@ struct ExpenseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // CoreData
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: ExpenseCD.getAllExpenseData(sortBy: ExpenseCDSort.occuredOn, ascending: false)) var expense: FetchedResults<ExpenseCD>
+    @FetchRequest(fetchRequest: ExpenseCD.sortExpenseDataByFrequency(frequency: Frequency.onetime)) var expense: FetchedResults<ExpenseCD>
     
     @State private var filter: ExpenseCDFilterTime = .all
     @State private var showFilterSheet = false
