@@ -3,6 +3,7 @@
     <entity name="ExpenseCD" representedClassName=".ExpenseCD" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="frequencyValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageAttached" optional="YES" attributeType="Binary"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="occuredOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -11,17 +12,7 @@
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="MonthlyTransactionCD" representedClassName=".MonthlyTransactionCD" syncable="YES">
-        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="imageAttached" optional="YES" attributeType="Binary"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="tag" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
-        <attribute name="usingDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
     <elements>
-        <element name="ExpenseCD" positionX="-63" positionY="-9" width="128" height="164"/>
-        <element name="MonthlyTransactionCD" positionX="-63" positionY="63" width="128" height="134"/>
+        <element name="ExpenseCD" positionX="-63" positionY="-9" width="128" height="179"/>
     </elements>
 </model>

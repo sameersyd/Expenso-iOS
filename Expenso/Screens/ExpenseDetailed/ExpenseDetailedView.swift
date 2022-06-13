@@ -18,8 +18,11 @@ struct ExpenseDetailedView: View {
     
     @State private var confirmDelete = false
     
-    init(expenseObj: ExpenseCD) {
+    var editViewHasToggle: Bool
+    
+    init(expenseObj: ExpenseCD, editViewHasToggle: Bool) {
         viewModel = ExpenseDetailedViewModel(expenseObj: expenseObj)
+        self.editViewHasToggle = editViewHasToggle
     }
     
     var body: some View {
@@ -74,7 +77,7 @@ struct ExpenseDetailedView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(destination: AddExpenseView(viewModel: AddExpenseViewModel(expenseObj: viewModel.expenseObj)), label: {
+                        NavigationLink(destination: AddExpenseView(viewModel: AddExpenseViewModel(expenseObj: viewModel.expenseObj), hasToggle: editViewHasToggle), label: {
                             Image("pencil_icon").resizable().frame(width: 28.0, height: 28.0)
                             Text("Edit").modifier(InterFont(.semiBold, size: 18)).foregroundColor(.white)
                         })

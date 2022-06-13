@@ -48,7 +48,7 @@ class AddExpenseViewModel: ObservableObject {
         self.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
         self.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
         self.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
-        if expenseObj?.frequencyValue == .monthly {
+        if expenseObj?.frequency == .monthly {
             monthlyFrequency = true
         }
         if let data = expenseObj?.imageAttached {
@@ -63,9 +63,9 @@ class AddExpenseViewModel: ObservableObject {
     }
     
     func getButtText() -> String {
-        if selectedType == TRANS_TYPE_INCOME { return "\((expenseObj != nil || monthlyTransactionObj != nil) ? "EDIT" : "ADD") INCOME" }
-        else if selectedType == TRANS_TYPE_EXPENSE { return "\((expenseObj != nil || monthlyTransactionObj != nil) ? "EDIT" : "ADD") EXPENSE" }
-        else { return "\((expenseObj != nil || monthlyTransactionObj != nil) ? "EDIT" : "ADD") TRANSACTION" }
+        if selectedType == TRANS_TYPE_INCOME { return "\(expenseObj != nil ? "EDIT" : "ADD") INCOME" }
+        else if selectedType == TRANS_TYPE_EXPENSE { return "\(expenseObj != nil ? "EDIT" : "ADD") EXPENSE" }
+        else { return "\(expenseObj != nil ? "EDIT" : "ADD") TRANSACTION" }
     }
     
     func attachImage() { AttachmentHandler.shared.showAttachmentActionSheet() }
@@ -132,9 +132,9 @@ class AddExpenseViewModel: ObservableObject {
         expense.note = note
         expense.amount = amount
         if monthlyFrequency {
-            expense.frequencyValue = .monthly
+            expense.frequency = .monthly
         } else {
-            expense.frequencyValue = .onetime
+            expense.frequency = .onetime
         }
         do {
             try managedObjectContext.save()
@@ -150,4 +150,32 @@ class AddExpenseViewModel: ObservableObject {
         } catch { alertMsg = "\(error)"; showAlert = true }
     }
     
+    func repeatTransaction(managedObjectContext: NSManagedObjectContext) {
+        do {
+            //TODO: Make sure that only the transactions from one month ago are re done.
+            let request = ExpenseCD.sortExpenseDataByFrequency(frequency: Frequency.monthly)
+            let monthlyExpenses = try managedObjectContext.fetch(request)
+            for expense in monthlyExpenses {
+                if let compareDate = Calendar.current.date(byAdding: .month, value: 1, to: expense.occuredOn ?? Date()) {
+                    if Calendar.current.isDateInToday(compareDate) || compareDate < Date() {
+                        selectedType = expense.type ?? TRANS_TYPE_INCOME
+                        selectedTag = expense.tag ?? TRANS_TAG_OTHERS
+                        title = expense.title ?? ""
+                        occuredOn = compareDate
+                        if let image = imageAttached {
+                            expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+                        }
+                        note = expense.note ?? ""
+                        amount = String(expense.amount)
+                        monthlyFrequency = true
+                        
+                        //change frequency of old object to onetime
+                        expense.frequency = .onetime
+                        self.saveTransaction(managedObjectContext: managedObjectContext)
+                    }
+                }
+            }
+            try managedObjectContext.save(); closePresenter = true
+        } catch { alertMsg = "\(error)"; showAlert = true; print(error) }
+    }
 }

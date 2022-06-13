@@ -12,7 +12,9 @@ struct ExpenseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // CoreData
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: ExpenseCD.sortExpenseDataByFrequency(frequency: Frequency.onetime)) var expense: FetchedResults<ExpenseCD>
+    
+    //MARK: Do you still need this Fetch Request I can't see any use case
+    @FetchRequest(fetchRequest: ExpenseCD.getAllExpenseData(sortBy: ExpenseCDSort.occuredOn, ascending: false)) var expense: FetchedResults<ExpenseCD>
     
     @State private var filter: ExpenseCDFilterTime = .all
     @State private var showFilterSheet = false
@@ -62,6 +64,11 @@ struct ExpenseView: View {
                         NavigationLink(destination: NavigationLazyView(AddExpenseView(viewModel: AddExpenseViewModel())),
                                        label: { Image("plus_icon").resizable().frame(width: 32.0, height: 32.0) })
                         .padding().background(Color.main_color).cornerRadius(35)
+                        Button(action: {
+                            AddExpenseViewModel().repeatTransaction(managedObjectContext: managedObjectContext)
+                        }, label: {
+                            Text("Test data")
+                        })
                     }
                 }.padding()
             }
@@ -70,9 +77,6 @@ struct ExpenseView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .onAppear() {
-            AddExpenseViewModel().checkAllMonthlyExpenses(managedObjectContext: managedObjectContext, request: MonthlyTransactionCD.getAllMonthlyExpenseData())
-        }
     }
 }
 
@@ -139,7 +143,7 @@ struct ExpenseMainView: View {
                 }.padding(4)
                 
                 ForEach(self.fetchRequest.wrappedValue) { expenseObj in
-                    NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
+                    NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj, editViewHasToggle: false), label: { ExpenseTransView(expenseObj: expenseObj) })
                 }
             }
             

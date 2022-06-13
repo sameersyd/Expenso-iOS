@@ -37,7 +37,12 @@ public class ExpenseCD: NSManagedObject, Identifiable {
     @NSManaged public var amount: Double
     @NSManaged public var imageAttached: Data?
     
-    @NSManaged public var frequencyValue: Frequency
+    @NSManaged public var frequencyValue: Int16
+    
+    var frequency: Frequency {
+        get { return Frequency.init(rawValue: frequencyValue) ?? .onetime}
+        set { frequencyValue = newValue.rawValue}
+    }
 }
 
 extension ExpenseCD {
@@ -62,7 +67,6 @@ extension ExpenseCD {
     static func sortExpenseDataByFrequency(sortBy: ExpenseCDSort = .occuredOn, frequency: Frequency, ascending: Bool = true) -> NSFetchRequest<ExpenseCD> {
         let request: NSFetchRequest<ExpenseCD> = ExpenseCD.fetchRequest() as! NSFetchRequest<ExpenseCD>
         let sortDescriptor = NSSortDescriptor(key: sortBy.rawValue, ascending: ascending)
-        print(frequency.rawValue)
         let predicate = NSPredicate(format: "frequencyValue == %i", frequency.rawValue)
         request.predicate = predicate
         request.sortDescriptors = [sortDescriptor]

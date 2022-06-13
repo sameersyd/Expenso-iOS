@@ -17,6 +17,8 @@ struct AddExpenseView: View {
     
     @StateObject var viewModel: AddExpenseViewModel
     
+    var hasToggle: Bool = true
+    
     let typeOptions = [
         DropdownOption(key: TRANS_TYPE_INCOME, val: "Income"),
         DropdownOption(key: TRANS_TYPE_EXPENSE, val: "Expense")
@@ -114,12 +116,15 @@ struct AddExpenseView: View {
                                 .background(Color.secondary_color)
                                 .cornerRadius(4)
                             
-                            Toggle("monthly", isOn: $viewModel.monthlyFrequency)
-                                .padding(5)
-                                .accentColor(Color.text_primary_color)
-                                .frame(height: 50).padding(.leading, 16)
-                                .background(Color.secondary_color)
-                                .cornerRadius(4)
+                            if hasToggle {
+                                //MARK: User can define Transaction as monthly when it is created or change it to onetime, when in the Monthly Transaction View. The User is not allowed to change the state from onetime to monthly in the recent transaction list to prevent that the transaction is done more than one time monthly. If it should be monthly the user has to created a new Expense
+                                Toggle("monthly", isOn: $viewModel.monthlyFrequency)
+                                    .padding(5)
+                                    .accentColor(Color.text_primary_color)
+                                    .frame(height: 50).padding(.leading, 16)
+                                    .background(Color.secondary_color)
+                                    .cornerRadius(4)
+                            }
                             
                             Button(action: { viewModel.attachImage() }, label: {
                                 HStack {
@@ -154,7 +159,6 @@ struct AddExpenseView: View {
                             }
                             
                             Spacer().frame(height: 150)
-                            //Spacer()
                         }
                         .frame(maxWidth: .infinity).padding(.horizontal, 8)
                         .alert(isPresented: $viewModel.showAlert,
@@ -166,16 +170,6 @@ struct AddExpenseView: View {
                 VStack {
                     Spacer()
                     VStack {
-                        if viewModel.expenseObj == nil {
-                            Button(action: { viewModel.saveMonthlyTransaction(managedObjectContext: managedObjectContext) }, label: {
-                                HStack {
-                                    Spacer()
-                                    TextView(text: "\(viewModel.getButtText()) every Month", type: .button).foregroundColor(.white)
-                                    Spacer()
-                                }
-                            })
-                            .padding(.vertical, 12).background(Color.main_color).cornerRadius(8)
-                        }
                         Button(action: { viewModel.saveTransaction(managedObjectContext: managedObjectContext) }, label: {
                             HStack {
                                 Spacer()
