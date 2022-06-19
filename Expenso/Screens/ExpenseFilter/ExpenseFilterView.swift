@@ -168,7 +168,7 @@ struct ExpenseFilterTransList: View {
     
     var body: some View {
         ForEach(self.fetchRequest.wrappedValue) { expenseObj in
-            NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
+            NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj, editViewHasToggle: false), label: { ExpenseTransView(expenseObj: expenseObj) })
         }
     }
 }

@@ -27,12 +27,13 @@ class AddExpenseViewModel: ObservableObject {
     @Published var imageUpdated = false // When transaction edit, check if attachment is updated?
     @Published var imageAttached: UIImage? = nil
     
+    @Published var monthlyFrequency = false
+    
     @Published var alertMsg = String()
     @Published var showAlert = false
     @Published var closePresenter = false
     
     init(expenseObj: ExpenseCD? = nil) {
-        
         self.expenseObj = expenseObj
         self.title = expenseObj?.title ?? ""
         if let expenseObj = expenseObj {
@@ -47,6 +48,9 @@ class AddExpenseViewModel: ObservableObject {
         self.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
         self.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
         self.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
+        if expenseObj?.frequency == .monthly {
+            monthlyFrequency = true
+        }
         if let data = expenseObj?.imageAttached {
             self.imageAttached = UIImage(data: data)
         }
@@ -55,12 +59,13 @@ class AddExpenseViewModel: ObservableObject {
             self?.imageUpdated = true
             self?.imageAttached = image
         }
+        
     }
     
     func getButtText() -> String {
-        if selectedType == TRANS_TYPE_INCOME { return "\(expenseObj == nil ? "ADD" : "EDIT") INCOME" }
-        else if selectedType == TRANS_TYPE_EXPENSE { return "\(expenseObj == nil ? "ADD" : "EDIT") EXPENSE" }
-        else { return "\(expenseObj == nil ? "ADD" : "EDIT") TRANSACTION" }
+        if selectedType == TRANS_TYPE_INCOME { return "\(expenseObj != nil ? "EDIT" : "ADD") INCOME" }
+        else if selectedType == TRANS_TYPE_EXPENSE { return "\(expenseObj != nil ? "EDIT" : "ADD") EXPENSE" }
+        else { return "\(expenseObj != nil ? "EDIT" : "ADD") TRANSACTION" }
     }
     
     func attachImage() { AttachmentHandler.shared.showAttachmentActionSheet() }
@@ -126,6 +131,11 @@ class AddExpenseViewModel: ObservableObject {
         expense.occuredOn = occuredOn
         expense.note = note
         expense.amount = amount
+        if monthlyFrequency {
+            expense.frequency = .monthly
+        } else {
+            expense.frequency = .onetime
+        }
         do {
             try managedObjectContext.save()
             closePresenter = true
@@ -138,5 +148,34 @@ class AddExpenseViewModel: ObservableObject {
         do {
             try managedObjectContext.save(); closePresenter = true
         } catch { alertMsg = "\(error)"; showAlert = true }
+    }
+    
+    func repeatTransaction(managedObjectContext: NSManagedObjectContext) {
+        do {
+            //TODO: Make sure that only the transactions from one month ago are re done.
+            let request = ExpenseCD.sortExpenseDataByFrequency(frequency: Frequency.monthly)
+            let monthlyExpenses = try managedObjectContext.fetch(request)
+            for expense in monthlyExpenses {
+                if let compareDate = Calendar.current.date(byAdding: .month, value: 1, to: expense.occuredOn ?? Date()) {
+                    if Calendar.current.isDateInToday(compareDate) || compareDate < Date() {
+                        selectedType = expense.type ?? TRANS_TYPE_INCOME
+                        selectedTag = expense.tag ?? TRANS_TAG_OTHERS
+                        title = expense.title ?? ""
+                        occuredOn = compareDate
+                        if let image = imageAttached {
+                            expense.imageAttached = image.jpegData(compressionQuality: 1.0)
+                        }
+                        note = expense.note ?? ""
+                        amount = String(expense.amount)
+                        monthlyFrequency = true
+                        
+                        //change frequency of old object to onetime
+                        expense.frequency = .onetime
+                        self.saveTransaction(managedObjectContext: managedObjectContext)
+                    }
+                }
+            }
+            try managedObjectContext.save(); closePresenter = true
+        } catch { alertMsg = "\(error)"; showAlert = true; print(error) }
     }
 }

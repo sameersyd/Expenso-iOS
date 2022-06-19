@@ -18,8 +18,14 @@ struct ExpenseDetailedView: View {
     
     @State private var confirmDelete = false
     
-    init(expenseObj: ExpenseCD) {
+    var editViewHasToggle: Bool
+    
+    let isMonthly: Bool
+    
+    init(expenseObj: ExpenseCD, editViewHasToggle: Bool) {
         viewModel = ExpenseDetailedViewModel(expenseObj: expenseObj)
+        self.editViewHasToggle = editViewHasToggle
+        self.isMonthly = editViewHasToggle
     }
     
     var body: some View {
@@ -41,6 +47,12 @@ struct ExpenseDetailedView: View {
                             ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense" )
                             ExpenseDetailedListView(title: "Tag", description: getTransTagTitle(transTag: viewModel.expenseObj.tag ?? ""))
                             ExpenseDetailedListView(title: "When", description: getDateFormatter(date: viewModel.expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))
+                            if self.isMonthly {
+                                Text("This transaction was last performed on this date and will be repeated one month in advance unless you change the status to not monthly")
+                                    .foregroundColor(.gray)
+                                    .fontWeight(.light)
+                                    .font(.subheadline)
+                            }
                             if let note = viewModel.expenseObj.note, note != "" {
                                 ExpenseDetailedListView(title: "Note", description: note)
                             }
@@ -74,7 +86,7 @@ struct ExpenseDetailedView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(destination: AddExpenseView(viewModel: AddExpenseViewModel(expenseObj: viewModel.expenseObj)), label: {
+                        NavigationLink(destination: AddExpenseView(viewModel: AddExpenseViewModel(expenseObj: viewModel.expenseObj), hasToggle: editViewHasToggle), label: {
                             Image("pencil_icon").resizable().frame(width: 28.0, height: 28.0)
                             Text("Edit").modifier(InterFont(.semiBold, size: 18)).foregroundColor(.white)
                         })

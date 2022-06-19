@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24A10DD02856809200C0BA52 /* Expenso.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24A10DCE2856809200C0BA52 /* Expenso.xcdatamodeld */; };
+		24D9168D285735920025227B /* MonthlyTransactionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9168C285735920025227B /* MonthlyTransactionSettingsView.swift */; };
 		736C720A25CFD89900720DEA /* empty-face.json in Resources */ = {isa = PBXBuildFile; fileRef = 736C720925CFD89900720DEA /* empty-face.json */; };
 		736C721B25CFE8E200720DEA /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736C721A25CFE8E200720DEA /* LottieView.swift */; };
 		738B1C1825C65DFE0067407B /* ExpensoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C1725C65DFE0067407B /* ExpensoApp.swift */; };
 		738B1C1C25C65E060067407B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C1B25C65E060067407B /* Assets.xcassets */; };
 		738B1C1F25C65E060067407B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 738B1C1E25C65E060067407B /* Preview Assets.xcassets */; };
-		738B1C2425C65E060067407B /* Expenso.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C2225C65E060067407B /* Expenso.xcdatamodeld */; };
 		738B1C2F25C65EF70067407B /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C2E25C65EF70067407B /* Configs.swift */; };
 		738B1C3325C660140067407B /* ExpenseCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C3225C660140067407B /* ExpenseCD.swift */; };
 		738B1C3825C661750067407B /* ExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738B1C3725C661750067407B /* ExpenseView.swift */; };
@@ -53,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		1B0E373FB89DD0864398FEE7 /* Pods_Expenso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Expenso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24A10DCF2856809200C0BA52 /* Expenso.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Expenso.xcdatamodel; sourceTree = "<group>"; };
+		24D9168C285735920025227B /* MonthlyTransactionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTransactionSettingsView.swift; sourceTree = "<group>"; };
 		2C2D1600DAC62FA04EDCF170 /* Pods-Expenso.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Expenso.debug.xcconfig"; path = "Target Support Files/Pods-Expenso/Pods-Expenso.debug.xcconfig"; sourceTree = "<group>"; };
 		736C720925CFD89900720DEA /* empty-face.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "empty-face.json"; sourceTree = "<group>"; };
 		736C721A25CFE8E200720DEA /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -60,7 +63,6 @@
 		738B1C1725C65DFE0067407B /* ExpensoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensoApp.swift; sourceTree = "<group>"; };
 		738B1C1B25C65E060067407B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		738B1C1E25C65E060067407B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		738B1C2325C65E060067407B /* Expenso.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Expenso.xcdatamodel; sourceTree = "<group>"; };
 		738B1C2525C65E060067407B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		738B1C2E25C65EF70067407B /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		738B1C3225C660140067407B /* ExpenseCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCD.swift; sourceTree = "<group>"; };
@@ -112,9 +114,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24D9168B285735730025227B /* MonthlyTransactionSettings */ = {
+			isa = PBXGroup;
+			children = (
+				24D9168C285735920025227B /* MonthlyTransactionSettingsView.swift */,
+			);
+			path = MonthlyTransactionSettings;
+			sourceTree = "<group>";
+		};
 		733763A827120DB600AA983A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				24D9168B285735730025227B /* MonthlyTransactionSettings */,
 				739DFF7925DC1E23005BD5C8 /* Authenticate */,
 				738B1C8E25C680C50067407B /* About */,
 				738B1C8925C67D790067407B /* ExpenseFilter */,
@@ -180,7 +191,7 @@
 				738B1C1725C65DFE0067407B /* ExpensoApp.swift */,
 				738B1C1B25C65E060067407B /* Assets.xcassets */,
 				738B1C2525C65E060067407B /* Info.plist */,
-				738B1C2225C65E060067407B /* Expenso.xcdatamodeld */,
+				24A10DCE2856809200C0BA52 /* Expenso.xcdatamodeld */,
 				738B1C1D25C65E060067407B /* Preview Content */,
 				738B1C2E25C65EF70067407B /* Configs.swift */,
 			);
@@ -454,7 +465,7 @@
 				738B1C9025C680D20067407B /* AboutView.swift in Sources */,
 				738B1C4F25C663180067407B /* DateExtension.swift in Sources */,
 				738B1C5225C6632F0067407B /* HelperMethods.swift in Sources */,
-				738B1C2425C65E060067407B /* Expenso.xcdatamodeld in Sources */,
+				24A10DD02856809200C0BA52 /* Expenso.xcdatamodeld in Sources */,
 				738B1C8B25C67D880067407B /* ExpenseFilterView.swift in Sources */,
 				739DFF7B25DC1E3C005BD5C8 /* AuthenticateView.swift in Sources */,
 				738B1C3325C660140067407B /* ExpenseCD.swift in Sources */,
@@ -463,6 +474,7 @@
 				738B1C3C25C662580067407B /* Models.swift in Sources */,
 				753CBDD325F36864005762B8 /* BiometricAuthUtility.swift in Sources */,
 				738B1C7325C674320067407B /* ExpenseSettingsView.swift in Sources */,
+				24D9168D285735920025227B /* MonthlyTransactionSettingsView.swift in Sources */,
 				75C6B48025F37FD20079BCFC /* AuthenticationViewModel.swift in Sources */,
 				738B1C4C25C663060067407B /* DismissKeyboard.swift in Sources */,
 				738B1C4625C662D90067407B /* TextView.swift in Sources */,
@@ -670,12 +682,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		738B1C2225C65E060067407B /* Expenso.xcdatamodeld */ = {
+		24A10DCE2856809200C0BA52 /* Expenso.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				738B1C2325C65E060067407B /* Expenso.xcdatamodel */,
+				24A10DCF2856809200C0BA52 /* Expenso.xcdatamodel */,
 			);
-			currentVersion = 738B1C2325C65E060067407B /* Expenso.xcdatamodel */;
+			currentVersion = 24A10DCF2856809200C0BA52 /* Expenso.xcdatamodel */;
 			path = Expenso.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -12,6 +12,8 @@ struct ExpenseView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // CoreData
     @Environment(\.managedObjectContext) var managedObjectContext
+    
+    //MARK: Do you still need this Fetch Request I can't see any use case
     @FetchRequest(fetchRequest: ExpenseCD.getAllExpenseData(sortBy: ExpenseCDSort.occuredOn, ascending: false)) var expense: FetchedResults<ExpenseCD>
     
     @State private var filter: ExpenseCDFilterTime = .all
@@ -20,6 +22,8 @@ struct ExpenseView: View {
     @State private var showOptionsSheet = false
     @State private var displayAbout = false
     @State private var displaySettings = false
+    @State private var displayMonthlyTransaction = false
+    
     
     var body: some View {
         NavigationView {
@@ -29,6 +33,7 @@ struct ExpenseView: View {
                 VStack {
                     NavigationLink(destination: NavigationLazyView(ExpenseSettingsView()), isActive: $displaySettings, label: {})
                     NavigationLink(destination: NavigationLazyView(AboutView()), isActive: $displayAbout, label: {})
+                    NavigationLink(destination: NavigationLazyView(MonthlyTransactionSettingsView()), isActive: $displayMonthlyTransaction, label: {})
                     ToolbarModelView(title: "Dashboard", hasBackButt: false, button1Icon: IMAGE_OPTION_ICON, button2Icon: IMAGE_FILTER_ICON) { self.presentationMode.wrappedValue.dismiss() }
                         button1Method: { self.showOptionsSheet = true }
                         button2Method: { self.showFilterSheet = true }
@@ -45,6 +50,7 @@ struct ExpenseView: View {
                             ActionSheet(title: Text("Select an option"), buttons: [
                                     .default(Text("About")) { self.displayAbout = true },
                                     .default(Text("Settings")) { self.displaySettings = true },
+                                    .default(Text("Monthly Transactions")) { self.displayMonthlyTransaction = true },
                                     .cancel()
                             ])
                         }
@@ -66,6 +72,9 @@ struct ExpenseView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onAppear() {
+            AddExpenseViewModel().repeatTransaction(managedObjectContext: managedObjectContext)
+        }
     }
 }
 
@@ -132,7 +141,7 @@ struct ExpenseMainView: View {
                 }.padding(4)
                 
                 ForEach(self.fetchRequest.wrappedValue) { expenseObj in
-                    NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj), label: { ExpenseTransView(expenseObj: expenseObj) })
+                    NavigationLink(destination: ExpenseDetailedView(expenseObj: expenseObj, editViewHasToggle: false), label: { ExpenseTransView(expenseObj: expenseObj) })
                 }
             }
             
