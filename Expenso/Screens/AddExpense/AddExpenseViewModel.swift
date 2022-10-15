@@ -16,13 +16,13 @@ class AddExpenseViewModel: ObservableObject {
     @Published var amount = ""
     @Published var occuredOn = Date()
     @Published var note = ""
-    @Published var typeTitle = "Income"
-    @Published var tagTitle = getTransTagTitle(transTag: TRANS_TAG_TRANSPORT)
+    @Published var typeTitle = "Expense"
+    @Published var tagTitle = getTransTagTitle(transTag: TRANS_TAG_OTHERS)
     @Published var showTypeDrop = false
     @Published var showTagDrop = false
     
-    @Published var selectedType = TRANS_TYPE_INCOME
-    @Published var selectedTag = TRANS_TAG_TRANSPORT
+    @Published var selectedType = TRANS_TYPE_EXPENSE
+    @Published var selectedTag = TRANS_TAG_OTHERS
     
     @Published var imageUpdated = false // When transaction edit, check if attachment is updated?
     @Published var imageAttached: UIImage? = nil
@@ -40,13 +40,13 @@ class AddExpenseViewModel: ObservableObject {
             self.typeTitle = expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense"
         } else {
             self.amount = ""
-            self.typeTitle = "Income"
+            self.typeTitle = "Expense"
         }
         self.occuredOn = expenseObj?.occuredOn ?? Date()
         self.note = expenseObj?.note ?? ""
-        self.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_TRANSPORT)
-        self.selectedType = expenseObj?.type ?? TRANS_TYPE_INCOME
-        self.selectedTag = expenseObj?.tag ?? TRANS_TAG_TRANSPORT
+        self.tagTitle = getTransTagTitle(transTag: expenseObj?.tag ?? TRANS_TAG_OTHERS)
+        self.selectedType = expenseObj?.type ?? TRANS_TYPE_EXPENSE
+        self.selectedTag = expenseObj?.tag ?? TRANS_TAG_OTHERS
         if let data = expenseObj?.imageAttached {
             self.imageAttached = UIImage(data: data)
         }

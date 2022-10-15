@@ -30,7 +30,7 @@ let CURRENCY_LIST = ["₹", "$", "€", "¥", "£", "¢", "₭"]
 let TRANS_TYPE_INCOME = "income"
 let TRANS_TYPE_EXPENSE = "expense"
 
-// Transaction tags
+// Expense Transaction tags
 let TRANS_TAG_TRANSPORT = "transport"
 let TRANS_TAG_FOOD = "food"
 let TRANS_TAG_HOUSING = "housing"
@@ -39,11 +39,20 @@ let TRANS_TAG_MEDICAL = "medical"
 let TRANS_TAG_SAVINGS = "savings"
 let TRANS_TAG_PERSONAL = "personal"
 let TRANS_TAG_ENTERTAINMENT = "entertainment"
-let TRANS_TAG_OTHERS = "others"
 let TRANS_TAG_UTILITIES = "utilities"
+
+// Income Transaction tags
+let TRANS_TAG_SALARY = "salary"
+let TRANS_TAG_CASHBACK = "cashback"
+let TRANS_TAG_INVESTMENT_RETURNS = "investment_returns"
+let TRANS_TAG_SALE = "sale"
+
+// Common Transaction tags
+let TRANS_TAG_OTHERS = "others"
 
 func getTransTagIcon(transTag: String) -> String {
     switch transTag {
+        // Expenses
         case TRANS_TAG_TRANSPORT: return "trans_type_transport"
         case TRANS_TAG_FOOD: return "trans_type_food"
         case TRANS_TAG_HOUSING: return "trans_type_housing"
@@ -52,14 +61,22 @@ func getTransTagIcon(transTag: String) -> String {
         case TRANS_TAG_SAVINGS: return "trans_type_savings"
         case TRANS_TAG_PERSONAL: return "trans_type_personal"
         case TRANS_TAG_ENTERTAINMENT: return "trans_type_entertainment"
-        case TRANS_TAG_OTHERS: return "trans_type_others"
         case TRANS_TAG_UTILITIES: return "trans_type_utilities"
+        
+        // Incomes
+        // TODO: Add icon sets for every income tag
+        case TRANS_TAG_SALARY: return "trans_type_savings"
+        case TRANS_TAG_CASHBACK: return "trans_type_savings"
+        case TRANS_TAG_INVESTMENT_RETURNS: return "trans_type_savings"
+        case TRANS_TAG_SALE: return "trans_type_savings"
+        
         default: return "trans_type_others"
     }
 }
 
 func getTransTagTitle(transTag: String) -> String {
     switch transTag {
+        // Expenses
         case TRANS_TAG_TRANSPORT: return "Transport"
         case TRANS_TAG_FOOD: return "Food"
         case TRANS_TAG_HOUSING: return "Housing"
@@ -68,8 +85,17 @@ func getTransTagTitle(transTag: String) -> String {
         case TRANS_TAG_SAVINGS: return "Savings"
         case TRANS_TAG_PERSONAL: return "Personal"
         case TRANS_TAG_ENTERTAINMENT: return "Entertainment"
-        case TRANS_TAG_OTHERS: return "Others"
         case TRANS_TAG_UTILITIES: return "Utilities"
+        
+        // Incomes
+        case TRANS_TAG_SALARY: return "Salary"
+        case TRANS_TAG_CASHBACK: return "Cashback"
+        case TRANS_TAG_INVESTMENT_RETURNS: return "Investment Returns"
+        case TRANS_TAG_SALE: return "Sale"
+        
+        // Common
+        case TRANS_TAG_OTHERS: return "Others"
+        
         default: return "Unknown"
     }
 }

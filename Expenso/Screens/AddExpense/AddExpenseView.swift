@@ -22,7 +22,7 @@ struct AddExpenseView: View {
         DropdownOption(key: TRANS_TYPE_EXPENSE, val: "Expense")
     ]
     
-    let tagOptions = [
+    let expenseTagOptions = [
         DropdownOption(key: TRANS_TAG_TRANSPORT, val: "Transport"),
         DropdownOption(key: TRANS_TAG_FOOD, val: "Food"),
         DropdownOption(key: TRANS_TAG_HOUSING, val: "Housing"),
@@ -33,6 +33,14 @@ struct AddExpenseView: View {
         DropdownOption(key: TRANS_TAG_ENTERTAINMENT, val: "Entertainment"),
         DropdownOption(key: TRANS_TAG_OTHERS, val: "Others"),
         DropdownOption(key: TRANS_TAG_UTILITIES, val: "Utilities")
+    ]
+    
+    let incomeTagOptions = [
+        DropdownOption(key: TRANS_TAG_SALARY, val: "Salary"),
+        DropdownOption(key: TRANS_TAG_CASHBACK, val: "Cashback"),
+        DropdownOption(key: TRANS_TAG_INVESTMENT_RETURNS, val: "Investment Returns"),
+        DropdownOption(key: TRANS_TAG_OTHERS, val: "Others"),
+        DropdownOption(key: TRANS_TAG_SALE, val: "Sale"),
     ]
     
     var body: some View {
@@ -88,8 +96,10 @@ struct AddExpenseView: View {
                             }
                             
                             DropdownButton(shouldShowDropdown: $viewModel.showTagDrop, displayText: $viewModel.tagTitle,
-                                           options: tagOptions, mainColor: Color.text_primary_color,
-                                           backgroundColor: Color.secondary_color, cornerRadius: 4, buttonHeight: 50) { key in
+                                           options: viewModel.selectedType == TRANS_TYPE_INCOME ? incomeTagOptions : expenseTagOptions,
+                                           mainColor: Color.text_primary_color, backgroundColor: Color.secondary_color,
+                                           cornerRadius: 4, buttonHeight: 50) { key in
+                                let tagOptions = viewModel.selectedType == TRANS_TYPE_INCOME ? incomeTagOptions : expenseTagOptions
                                 let selectedObj = tagOptions.filter({ $0.key == key }).first
                                 if let object = selectedObj {
                                     viewModel.tagTitle = object.val
