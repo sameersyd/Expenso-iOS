@@ -14,27 +14,18 @@ struct AddExpenseView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @State private var confirmDelete = false
     @State var showAttachSheet = false
-    
     @StateObject var viewModel: AddExpenseViewModel
     
     let typeOptions = [
-        DropdownOption(key: TRANS_TYPE_INCOME, val: "Income"),
-        DropdownOption(key: TRANS_TYPE_EXPENSE, val: "Expense")
+        DropdownOption(key: TransactionType.TRANS_TYPE_INCOME.rawValue, val: "Income"),
+        DropdownOption(key: TransactionType.TRANS_TYPE_EXPENSE.rawValue, val: "Expense")
     ]
     
-    let tagOptions = [
-        DropdownOption(key: TRANS_TAG_TRANSPORT, val: "Transport"),
-        DropdownOption(key: TRANS_TAG_FOOD, val: "Food"),
-        DropdownOption(key: TRANS_TAG_HOUSING, val: "Housing"),
-        DropdownOption(key: TRANS_TAG_INSURANCE, val: "Insurance"),
-        DropdownOption(key: TRANS_TAG_MEDICAL, val: "Medical"),
-        DropdownOption(key: TRANS_TAG_SAVINGS, val: "Savings"),
-        DropdownOption(key: TRANS_TAG_PERSONAL, val: "Personal"),
-        DropdownOption(key: TRANS_TAG_ENTERTAINMENT, val: "Entertainment"),
-        DropdownOption(key: TRANS_TAG_OTHERS, val: "Others"),
-        DropdownOption(key: TRANS_TAG_UTILITIES, val: "Utilities")
-    ]
-    
+  @State var tagOptions = DropdownOptionManager().returnDropDowns(.TRANS_TYPE_INCOME)
+  
+  
+ 
+  
     var body: some View {
         NavigationView {
             ZStack {
@@ -81,6 +72,7 @@ struct AddExpenseView: View {
                                            backgroundColor: Color.secondary_color, cornerRadius: 4, buttonHeight: 50) { key in
                                 let selectedObj = typeOptions.filter({ $0.key == key }).first
                                 if let object = selectedObj {
+                                  tagOptions = DropdownOptionManager().returnDropDowns((object.key == TransactionType.TRANS_TYPE_INCOME.rawValue ) ? .TRANS_TYPE_INCOME : .TRANS_TYPE_EXPENSE)
                                     viewModel.typeTitle = object.val
                                     viewModel.selectedType = key
                                 }
@@ -92,6 +84,7 @@ struct AddExpenseView: View {
                                            backgroundColor: Color.secondary_color, cornerRadius: 4, buttonHeight: 50) { key in
                                 let selectedObj = tagOptions.filter({ $0.key == key }).first
                                 if let object = selectedObj {
+                                  print(object.key)
                                     viewModel.tagTitle = object.val
                                     viewModel.selectedTag = key
                                 }

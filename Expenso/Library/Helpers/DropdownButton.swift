@@ -96,3 +96,28 @@ struct DropdownButton: View {
         }.animation(.spring())
     }
 }
+
+
+struct DropdownOptionManager {
+  func returnDropDowns(_ typeOfTransaction: TransactionType) -> [DropdownOption] {
+    guard typeOfTransaction == .TRANS_TYPE_INCOME else {
+      return [
+        DropdownOption(key: TransactionTags.TRANS_TAG_TRANSPORT.value, val: TransactionTags.TRANS_TAG_TRANSPORT.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_FOOD.value, val: TransactionTags.TRANS_TAG_FOOD.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_HOUSING.value, val: TransactionTags.TRANS_TAG_HOUSING.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_INSURANCE.value, val: TransactionTags.TRANS_TAG_INSURANCE.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_MEDICAL.value, val: TransactionTags.TRANS_TAG_MEDICAL.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_PERSONAL.value, val: TransactionTags.TRANS_TAG_PERSONAL.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_ENTERTAINMENT.value, val: TransactionTags.TRANS_TAG_ENTERTAINMENT.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_OTHERS.value, val: TransactionTags.TRANS_TAG_OTHERS.value.capitalized),
+        DropdownOption(key: TransactionTags.TRANS_TAG_UTILITIES.value, val: TransactionTags.TRANS_TAG_UTILITIES.value.capitalized)
+      ]
+    }
+    
+    return [
+      DropdownOption(key: TransactionTags.TRANS_TAG_SALARY.value, val: TransactionTags.TRANS_TAG_SALARY.value.capitalized),
+      DropdownOption(key: TransactionTags.TRANS_TAG_CASHBACK.value, val: TransactionTags.TRANS_TAG_CASHBACK.value.capitalized),
+      DropdownOption(key: TransactionTags.TRANS_TAG_INVESTMENTRETURS.value, val:TransactionTags.TRANS_TAG_INVESTMENTRETURS.value.capitalized)
+    ]
+  }
+}

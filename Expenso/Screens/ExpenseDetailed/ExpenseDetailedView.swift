@@ -38,8 +38,8 @@ struct ExpenseDetailedView: View {
                         VStack(spacing: 24) {
                             ExpenseDetailedListView(title: "Title", description: viewModel.expenseObj.title ?? "")
                             ExpenseDetailedListView(title: "Amount", description: "\(CURRENCY)\(viewModel.expenseObj.amount)")
-                            ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TRANS_TYPE_INCOME ? "Income" : "Expense" )
-                            ExpenseDetailedListView(title: "Tag", description: getTransTagTitle(transTag: viewModel.expenseObj.tag ?? ""))
+                          ExpenseDetailedListView(title: "Transaction type", description: viewModel.expenseObj.type == TransactionType.TRANS_TYPE_INCOME.rawValue ? "Income" : "Expense" )
+                          ExpenseDetailedListView(title: "Tag", description: TransactionTags.getTransactionTitle(viewModel.expenseObj.tag ?? ""))
                             ExpenseDetailedListView(title: "When", description: getDateFormatter(date: viewModel.expenseObj.occuredOn, format: "EEEE, dd MMM hh:mm a"))
                             if let note = viewModel.expenseObj.note, note != "" {
                                 ExpenseDetailedListView(title: "Note", description: note)
