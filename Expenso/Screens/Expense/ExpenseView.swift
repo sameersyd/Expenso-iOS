@@ -95,8 +95,8 @@ struct ExpenseMainView: View {
     private func getTotalBalance() -> String {
         var value = Double(0)
         for i in expense {
-            if i.type == TRANS_TYPE_INCOME { value += i.amount }
-            else if i.type == TRANS_TYPE_EXPENSE { value -= i.amount }
+          if i.type == TransactionType.TRANS_TYPE_INCOME.rawValue { value += i.amount }
+            else if i.type == TransactionType.TRANS_TYPE_EXPENSE.rawValue { value -= i.amount }
         }
         return "\(String(format: "%.2f", value))"
     }
@@ -158,7 +158,7 @@ struct ExpenseModelView: View {
     
     init(isIncome: Bool, filter: ExpenseCDFilterTime, categTag: String? = nil) {
         self.isIncome = isIncome
-        self.type = isIncome ? TRANS_TYPE_INCOME : TRANS_TYPE_EXPENSE
+        self.type = isIncome ? TransactionType.TRANS_TYPE_INCOME.rawValue : TransactionType.TRANS_TYPE_EXPENSE.rawValue
         let sortDescriptor = NSSortDescriptor(key: "occuredOn", ascending: false)
         if filter == .all {
             var predicate: NSPredicate!
@@ -216,11 +216,11 @@ struct ExpenseTransView: View {
                 HStack {
                     TextView(text: expenseObj.title ?? "", type: .subtitle_1, lineLimit: 1).foregroundColor(Color.text_primary_color)
                     Spacer()
-                    TextView(text: "\(expenseObj.type == TRANS_TYPE_INCOME ? "+" : "-")\(CURRENCY)\(expenseObj.amount)", type: .subtitle_1)
-                        .foregroundColor(expenseObj.type == TRANS_TYPE_INCOME ? Color.main_green : Color.main_red)
+                    TextView(text: "\(expenseObj.type == TransactionType.TRANS_TYPE_INCOME.rawValue ? "+" : "-")\(CURRENCY)\(expenseObj.amount)", type: .subtitle_1)
+                        .foregroundColor(expenseObj.type == TransactionType.TRANS_TYPE_INCOME.rawValue ? Color.main_green : Color.main_red)
                 }
                 HStack {
-                    TextView(text: getTransTagTitle(transTag: expenseObj.tag ?? ""), type: .body_2).foregroundColor(Color.text_primary_color)
+                  TextView(text: TransactionTags.getTransactionTitle(expenseObj.tag ?? ""), type: .body_2).foregroundColor(Color.text_primary_color)
                     Spacer()
                     TextView(text: getDateFormatter(date: expenseObj.occuredOn, format: "MMM dd, yyyy"), type: .body_2).foregroundColor(Color.text_primary_color)
                 }

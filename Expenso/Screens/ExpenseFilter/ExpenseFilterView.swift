@@ -27,7 +27,7 @@ struct ExpenseFilterView: View {
     func getToolbarTitle() -> String {
         if let isIncome = isIncome {
             return isIncome ? "Income" : "Expense"
-        } else if let tag = categTag { return getTransTagTitle(transTag: tag) }
+        } else if let tag = categTag { return TransactionTags.getTransactionTitle(tag)}
         return "Dashboard"
     }
     
@@ -101,14 +101,14 @@ struct ExpenseFilterChartView: View {
         
         var models = [ChartModel]()
         for i in transactions {
-            models.append(ChartModel(transType: getTransTagTitle(transTag: i.key), transAmount: i.value))
+          models.append(ChartModel(transType: TransactionTags.getTransactionTitle(i.key), transAmount: i.value))
         }
         return models
     }
     
     init(isIncome: Bool, filter: ExpenseCDFilterTime) {
         self.isIncome = isIncome
-        self.type = isIncome ? TRANS_TYPE_INCOME : TRANS_TYPE_EXPENSE
+      self.type = isIncome ? TransactionType.TRANS_TYPE_INCOME.rawValue : TransactionType.TRANS_TYPE_EXPENSE.rawValue
         let sortDescriptor = NSSortDescriptor(key: "occuredOn", ascending: false)
         if filter == .all {
             let predicate = NSPredicate(format: "type == %@", type)
@@ -146,7 +146,7 @@ struct ExpenseFilterTransList: View {
         if filter == .all {
             let predicate: NSPredicate!
             if let isIncome = isIncome {
-                predicate = NSPredicate(format: "type == %@", (isIncome ? TRANS_TYPE_INCOME : TRANS_TYPE_EXPENSE))
+                predicate = NSPredicate(format: "type == %@", (isIncome ? TransactionType.TRANS_TYPE_INCOME.rawValue : TransactionType.TRANS_TYPE_EXPENSE.rawValue))
             } else if let tag = tag { predicate = NSPredicate(format: "tag == %@", tag) }
             else { predicate = NSPredicate(format: "occuredOn <= %@", NSDate()) }
             fetchRequest = FetchRequest<ExpenseCD>(entity: ExpenseCD.entity(), sortDescriptors: [sortDescriptor], predicate: predicate)
@@ -158,7 +158,7 @@ struct ExpenseFilterTransList: View {
             else { startDate = Date().getLast6Month()! as NSDate }
             let predicate: NSPredicate!
             if let isIncome = isIncome {
-                predicate = NSPredicate(format: "occuredOn >= %@ AND occuredOn <= %@ AND type == %@", startDate, endDate, (isIncome ? TRANS_TYPE_INCOME : TRANS_TYPE_EXPENSE))
+                predicate = NSPredicate(format: "occuredOn >= %@ AND occuredOn <= %@ AND type == %@", startDate, endDate, (isIncome ? TransactionType.TRANS_TYPE_INCOME.rawValue : TransactionType.TRANS_TYPE_EXPENSE.rawValue))
             } else if let tag = tag {
                 predicate = NSPredicate(format: "occuredOn >= %@ AND occuredOn <= %@ AND tag == %@", startDate, endDate, tag)
             } else { predicate = NSPredicate(format: "occuredOn >= %@ AND occuredOn <= %@", startDate, endDate) }
